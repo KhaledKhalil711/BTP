@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BTP - Livrables</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body style="overflow: auto;">
+    <nav class="navbar">
+        <div class="nav-logo">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'core/images/logo.jpg' %}" alt="BTP Logo">
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'index' %}">Retour à l'accueil</a>
+        </div>
+    </nav>
+    <div class="section">
+        <h1 class="section-title">Livrables & Projets</h1>
+        <p style="text-align: center;">Espace de gestion des livrables...</p>
+        <!-- Content from PDF generic placeholder -->
+    </div>
+</body>
+</html>

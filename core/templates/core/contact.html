@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTP - Contactez-nous</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body style="overflow: auto;"> 
+    <nav class="navbar">
+        <div class="nav-logo">
+            <a href="{% url 'landing' %}">
+                <img src="{% static 'core/images/logo.jpg' %}" alt="BTP Logo">
+            </a>
+        </div>
+        <div class="nav-links" style="display: flex; align-items: center;">
+            <a href="{% url 'landing' %}">Accueil</a>
+            <a href="{% url 'landing' %}#profil">Profil</a>
+            <a href="{% url 'landing' %}#portfolio">Projets</a>
+            <a href="{% url 'landing' %}#services">Services</a>
+            <a href="{% url 'contact' %}" class="active">Contact</a>
+            
+            <!-- Dark Mode Toggle -->
+            <div class="theme-switch-wrapper" style="margin-left: 2rem;">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider round"></div>
+                </label>
+                <span style="margin-left: 10px;">🌙</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <h1>Contactez-nous</h1>
+        <p style="font-size: 1.2rem; margin-top: 1rem; color: #666;">Une question ? Un projet ? N'hésitez pas à nous écrire.</p>
+    </header>
+
+    <section class="section contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Nos Coordonnées</h3>
+                <div class="info-item">
+                    <span class="icon">📍</span>
+                    <p>123 Avenue de la Construction, Paris, 75000</p>
+                </div>
+                <div class="info-item">
+                    <span class="icon">📞</span>
+                    <p>+33 1 23 45 67 89</p>
+                </div>
+                <div class="info-item">
+                    <span class="icon">✉️</span>
+                    <p>contact@btp-company.com</p>
+                </div>
+            </div>
+
+            <form class="contact-form" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Nom / Entreprise</label>
+                    <input type="text" id="name" name="name" required placeholder="Votre nom">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Votre email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" required placeholder="Sujet de votre message">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Votre message..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-submit">Envoyer le message</button>
+            </form>
+        </div>
+    </section>
+    
+
+
+    <footer style="text-align: center; padding: 2rem; background-color: var(--primary-color); color: white; margin-top: auto;">
+        <p>&copy; 2026 BTP Company. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle Logic
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }    
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme);
+    </script>
+</body>
+</html>

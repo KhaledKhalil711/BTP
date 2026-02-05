@@ -11,15 +11,15 @@
 <body style="overflow: auto;"> 
     <nav class="navbar">
         <div class="nav-logo">
-            <a href="{% url 'landing' %}">
+            <a href="{% url 'index' %}">
                 <img src="{% static 'core/images/logo.jpg' %}" alt="BTP Logo">
             </a>
         </div>
         <div class="nav-links" style="display: flex; align-items: center;">
-            <a href="{% url 'landing' %}">Accueil</a>
-            <a href="{% url 'landing' %}#profil">Profil</a>
-            <a href="{% url 'landing' %}#portfolio">Projets</a>
-            <a href="{% url 'landing' %}#services">Services</a>
+            <a href="{% url 'index' %}">Accueil</a>
+            <a href="{% url 'index' %}#profil">Profil</a>
+            <a href="{% url 'index' %}#portfolio">Projets</a>
+            <a href="{% url 'index' %}#services">Services</a>
             <a href="{% url 'contact' %}" class="active">Contact</a>
             
             <!-- Dark Mode Toggle -->

@@ -13,7 +13,7 @@
     <div id="landing-page" class="landing-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; background-color: var(--bg-color); cursor: pointer;">
         <div class="content" style="text-align: center;">
             <img src="{% static 'core/images/logo_no_bg.png' %}" alt="BTP Logo" class="logo" id="logo-image" style="width: 500px; height: auto; max-width: 80vw; margin-bottom: 2rem;">
-            <h1 class="welcome-text" style="font-size: 3rem; color: var(--primary-color); margin: 0;">Bienvenue à BTP</h1>
+            <h1 class="welcome-text" style="font-size: 3rem; color: var(--primary-color); margin: 0;">Gourmelon BTP</h1>
         </div>
     </div>
 
@@ -56,8 +56,8 @@
     </nav>
 
     <header class="hero-section">
-        <h1>Construire l'avenir ensemble</h1>
-        <p style="font-size: 1.2rem; margin-top: 1rem; color: #666;">Expertise, Innovation et Qualité</p>
+        <h1>Lucas GOURMELON - Etudes & Formations</h1>
+        <p style="font-size: 1.2rem; margin-top: 1rem; color: #666;">11 ans d’expérience en BTP & 6 ans en Formation</p>
     </header>
 
     <section id="profil" class="section">
@@ -65,24 +65,24 @@
         <div class="profile-grid">
             <div class="profile-text">
                 <h3>Qui sommes-nous ?</h3>
-                <p>Spécialistes du BTP, nous mettons notre expertise au service de vos projets les plus ambitieux. De la conception à la réalisation, nous garantissons excellence et durabilité.</p>
+                <p>11 ans d’expérience en qualité de projeteur, de Modeleur BIM référent puis de Responsable d’Affaires dans 3 entreprises expertes et reconnues dans le domaine du BTP. 6 ans d’expérience en formations internes, sous-traitants et organismes de formation.</p>
                 
                 <div class="profile-stats">
                     <div class="stat-card">
-                        <span class="stat-number">15+</span>
+                        <span class="stat-number">11+</span>
                         <span>Années d'expérience</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">100+</span>
-                        <span>Projets réalisés</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">50</span>
-                        <span>Collaborateurs</span>
+                        <span class="stat-number">6+</span>
+                        <span>Années Formation</span>
                     </div>
                     <div class="stat-card">
                         <span class="stat-number">3</span>
-                        <span>Agences</span>
+                        <span>Entreprises Partenaires</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3</span>
+                        <span>Grands Projets</span>
                     </div>
                 </div>
             </div>
@@ -97,28 +97,28 @@
         <div class="portfolio-grid">
             <!-- Project 1 -->
             <div class="project-card">
-                <img src="{% static 'core/images/projects/project1.jpg' %}" alt="Gare Porte Maillot">
+                <img src="{% static 'core/images/projects/project1.jpg' %}" alt="CEA Cadarache">
                 <div class="project-info">
-                    <h3>Gare Porte Maillot</h3>
-                    <p>Réaménagement complet et restructuration.</p>
+                    <h3>CEA Cadarache</h3>
+                    <p>Bâtiments d'isolement et bureaux (4400m²). Responsable d'affaires.</p>
                 </div>
             </div>
             <!-- Project 2 -->
             <div class="project-card">
-                <img src="{% static 'core/images/projects/project2.jpg' %}" alt="Projet Résidentiel">
+                <img src="{% static 'core/images/projects/project2.jpg' %}" alt="Gare Porte Maillot">
                 <div class="project-info">
-                    <h3>Projet Résidentiel</h3>
-                    <p>Construction d'un complexe moderne et durable.</p>
+                    <h3>Gare Porte Maillot</h3>
+                    <p>Gare RER E souterraine. Projeteur référent BIM.</p>
                 </div>
             </div>
-            <!-- Placeholder -->
+            <!-- Project 3 -->
             <div class="project-card">
                 <div style="width:100%; height:250px; background-color:#ddd; display:flex; align-items:center; justify-content:center;">
-                    <span style="color:#888;">Projet en cours</span>
+                    <span style="color:#888;">Cap-Vert</span>
                 </div>
                 <div class="project-info">
-                    <h3>Extension Bureau</h3>
-                    <p>Optimisation de l'espace de travail.</p>
+                    <h3>Usines de désalinisation</h3>
+                    <p>Cap-Vert. Projeteur principal (SADE).</p>
                 </div>
             </div>
         </div>
@@ -135,7 +135,11 @@
     </section>
 
     <footer style="text-align: center; padding: 2rem; background-color: var(--primary-color); color: white;">
-        <p>&copy; 2026 BTP Company. Tous droits réservés.</p>
+        <p>&copy; 2026 Gourmelon BTP. Tous droits réservés.</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">
+            Email: <a href="mailto:gourmelon.btp@gmail.com" style="color: white; text-decoration: underline;">gourmelon.btp@gmail.com</a> | 
+            Tel: 06.16.47.28.32
+        </p>
     </footer>
     </div> <!-- Close main-content wrapper -->
 
@@ -171,41 +175,55 @@
         const mainContent = document.getElementById('main-content');
         const body = document.body;
 
-        // Ensure user can't scroll initially and content is hidden
-        body.style.overflow = 'hidden';
+        // Check if user has already seen the intro in this session
+        const hasSeenIntro = sessionStorage.getItem('introShown');
 
-        landingPage.addEventListener('click', () => {
-            // 1. Camera Zoom INTO Logo Effect
-            logo.classList.add('zoom-effect');
-            landingPage.classList.add('landing-fade');
-            
-            // Fade out welcome text quickly
-            welcomeText.style.transition = 'opacity 0.3s ease';
-            welcomeText.style.opacity = '0';
+        if (hasSeenIntro) {
+            // User has seen intro: Skip animation, show content immediately
+            landingPage.style.display = 'none';
+            loadingScreen.style.display = 'none';
+            mainContent.style.display = 'block';
+            body.style.overflow = 'auto';
+        } else {
+            // User hasn't seen intro: Setup initial state (implicitly hidden via CSS/HTML) & Animation
+            body.style.overflow = 'hidden';
 
-            // 2. Wait for zoom animation to complete (1.5s)
-            setTimeout(() => {
-                // Switch to Loading Screen
-                landingPage.style.display = 'none';
-                loadingScreen.style.display = 'flex'; 
+            landingPage.addEventListener('click', () => {
+                // 1. Camera Zoom INTO Logo Effect
+                logo.classList.add('zoom-effect');
+                landingPage.classList.add('landing-fade');
                 
-                // Fade in loader
+                // Fade out welcome text quickly
+                welcomeText.style.transition = 'opacity 0.3s ease';
+                welcomeText.style.opacity = '0';
+    
+                // 2. Wait for zoom animation to complete (1.5s)
                 setTimeout(() => {
-                    loadingScreen.classList.add('visible');
-                }, 50);
-
-                // 3. Loading Time then Reveal Main Content
-                setTimeout(() => {
-                    loadingScreen.style.opacity = '0';
+                    // Switch to Loading Screen
+                    landingPage.style.display = 'none';
+                    loadingScreen.style.display = 'flex'; 
+                    
+                    // Fade in loader
                     setTimeout(() => {
-                        loadingScreen.style.display = 'none';
-                        // Show main content and restore scrolling
-                        mainContent.style.display = 'block';
-                        body.style.overflow = 'auto';
-                    }, 500); // Wait for fade out
-                }, 2000); // 2 seconds loading time
-
-            }, 1500); // Match CSS animation duration
-        });
+                        loadingScreen.classList.add('visible');
+                    }, 50);
+    
+                    // 3. Loading Time then Reveal Main Content
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                            // Show main content and restore scrolling
+                            mainContent.style.display = 'block';
+                            body.style.overflow = 'auto';
+                            
+                            // Mark intro as shown for this session
+                            sessionStorage.setItem('introShown', 'true');
+                        }, 500); // Wait for fade out
+                    }, 2000); // 2 seconds loading time
+    
+                }, 1500); // Match CSS animation duration
+            });
+        }
     </script>
 </html>

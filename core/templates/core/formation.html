@@ -1,12 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>BTP - Formation</title>
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+
 <body style="overflow: auto;">
     <nav class="navbar">
         <div class="nav-logo">
@@ -20,8 +22,51 @@
     </nav>
     <div class="section">
         <h1 class="section-title">Nos Formations</h1>
-        <p style="text-align: center;">Détails des formations à venir...</p>
-        <!-- Content from PDF generic placeholder -->
+        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">Découvrez nos programmes de formation
+            professionnelle adaptés à tous les niveaux.</p>
+
+        <div class="formation-grid">
+            <!-- Niveau Débutant -->
+            <div class="formation-card">
+                <div class="card-header">
+                    <h2>Niveau Débutant</h2>
+                    <span class="badge">Fondamentaux</span>
+                </div>
+                <div class="card-body">
+                    <p class="description">Introduction aux bases du bâtiment, sécurité sur chantier, et lecture de
+                        plans simples. Idéal pour ceux qui débutent dans le secteur.</p>
+                    <div class="price-tag">1500€</div>
+                    <ul class="features">
+                        <li>Sécurité BTP</li>
+                        <li>Outillage de base</li>
+                        <li>Lecture de plans niv.1</li>
+                        <li>Durée: 2 semaines</li>
+                    </ul>
+                    <a href="{% url 'inscription' %}" class="btn-formation">S'inscrire</a>
+                </div>
+            </div>
+
+            <!-- Niveau Intermédiaire -->
+            <div class="formation-card">
+                <div class="card-header">
+                    <h2>Niveau Intermédiaire</h2>
+                    <span class="badge">Perfectionnement</span>
+                </div>
+                <div class="card-body">
+                    <p class="description">Techniques avancées de maçonnerie, gestion d'équipe, et utilisation d'outils
+                        complexes. Pour les professionnels souhaitant monter en compétences.</p>
+                    <div class="price-tag">2500€</div>
+                    <ul class="features">
+                        <li>Maçonnerie complexe</li>
+                        <li>Gestion d'équipe</li>
+                        <li>Lecture de plans niv.2</li>
+                        <li>Durée: 4 semaines</li>
+                    </ul>
+                    <a href="{% url 'inscription' %}" class="btn-formation">S'inscrire</a>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>

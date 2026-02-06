@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTP - Inscription</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body style="overflow: auto;">
+    <nav class="navbar">
+        <div class="nav-logo">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'core/images/logo.jpg' %}" alt="BTP Logo">
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'index' %}">Retour à l'accueil</a>
+        </div>
+    </nav>
+
+    <div class="registration-section">
+        <div class="registration-container">
+            <div class="registration-header">
+                <h2>Inscription</h2>
+                <p>Créez votre compte pour commencer</p>
+            </div>
+
+            <form class="contact-form" method="post">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="form-group-animated">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <span class="helptext">{{ field.help_text }}</span>
+                    {% endif %}
+                    {{ field.errors }}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn-register">Créer mon compte</button>
+            </form>
+            <p
+                style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; opacity: 0; animation: fadeInStagger 0.5s ease-out 1s forwards;">
+                Déjà inscrit ? <a href="#"
+                    style="color: var(--primary-color); font-weight: 600; text-decoration: none;">Se connecter</a>
+            </p>
+        </div>
+    </div>
+
+    <footer
+        style="text-align: center; padding: 2rem; background-color: var(--primary-color); color: white; margin-top: auto;">
+        <p>&copy; 2026 BTP Company. Tous droits réservés.</p>
+    </footer>
+</body>
+
+</html>

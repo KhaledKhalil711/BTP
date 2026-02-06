@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import InscriptionForm
 from django.contrib import messages
 from .models import ContactMessage
 def landing(request):
@@ -34,3 +35,6 @@ def contact(request):
         messages.success(request, "Message envoyé avec succès !")
 
     return render(request, "core/contact.html")
+def inscription(request):
+    form = InscriptionForm()
+    return render(request, 'core/inscription.html', {'form': form})

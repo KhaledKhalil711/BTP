@@ -1,13 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTP - Profil & Projets</title>
+    <title>Gourmelon BTP - Études & Formations | Expert BIM & Génie Civil</title>
+    <meta name="description" content="11 ans d'expérience en BTP & Génie Civil. Formation BIM, Revit, AutoCAD. Bureau d'études techniques.">
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body style="overflow: hidden;">
@@ -17,7 +18,7 @@
         <div class="content" style="text-align: center;">
             <img src="{% static 'core/images/logo_no_bg.png' %}" alt="BTP Logo" class="logo" id="logo-image"
                 style="width: 500px; height: auto; max-width: 80vw; margin-bottom: 2rem;">
-            <h1 class="welcome-text" style="font-size: 3rem; color: var(--primary-color); margin: 0;">Bienvenue à BTP
+            <h1 class="welcome-text" style="font-size: 3rem; color: var(--primary-color); margin: 0;">Gourmelon BTP
             </h1>
         </div>
     </div>
@@ -46,7 +47,10 @@
             </div>
             <div class="nav-links" style="display: flex; align-items: center;">
                 <a href="#profil">Profil</a>
-                <a href="#portfolio">Projets</a>
+                <a href="#experience">Expérience</a>
+                <a href="#competences">Compétences</a>
+                <a href="#projets">Projets</a>
+                <a href="#formation">Formation</a>
                 <a href="#services">Services</a>
                 <a href="{% url 'contact' %}">Contact</a>
 
@@ -61,162 +65,702 @@
             </div>
         </nav>
 
+        <!-- Hero Section -->
         <header class="hero-section">
-            <h1>Construire l'avenir ensemble</h1>
-            <p style="font-size: 1.2rem; margin-top: 1rem; color: #666;">Expertise, Innovation et Qualité</p>
+            <div class="hero-content">
+                <h1>Lucas GOURMELON</h1>
+                <h2 class="hero-subtitle">Études & Formations BTP</h2>
+                <p class="hero-description">Expert en Bureau d'Études Technique et Formation BIM</p>
+                <div class="hero-badges">
+                    <span class="badge">11 ans d'expérience BET</span>
+                    <span class="badge">6 ans de Formation</span>
+                    <span class="badge">Expert BIM & Génie Civil</span>
+                </div>
+                
+            </div>
         </header>
 
+        <!-- Profile Section -->
         <section id="profil" class="section">
-            <h2 class="section-title">Fiche Profil</h2>
+            <h2 class="section-title">Profil Professionnel</h2>
             <div class="profile-grid">
                 <div class="profile-text">
-                    <h3>Qui sommes-nous ?</h3>
-                    <p>Spécialistes du BTP, nous mettons notre expertise au service de vos projets les plus ambitieux.
-                        De la conception à la réalisation, nous garantissons excellence et durabilité.</p>
+                    <h3>Un Expert Multi-Casquettes</h3>
+                    <p class="intro-text">
+                        <strong>11 ans d'expérience</strong> en qualité de projeteur, de Modeleur BIM référent puis de 
+                        Responsable d'Affaires dans 3 entreprises expertes et reconnues dans le domaine du BTP.
+                    </p>
+                    <p class="intro-text">
+                        <strong>6 ans d'expérience</strong> en formations internes, sous-traitants et organismes de 
+                        formation sur les savoirs métiers et outils numériques.
+                    </p>
 
                     <div class="profile-stats">
                         <div class="stat-card">
-                            <span class="stat-number">15+</span>
-                            <span>Années d'expérience</span>
+                            <div class="stat-icon">📊</div>
+                            <span class="stat-number">11+</span>
+                            <span class="stat-label">Années BET</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">100+</span>
-                            <span>Projets réalisés</span>
+                            <div class="stat-icon">🎓</div>
+                            <span class="stat-number">6+</span>
+                            <span class="stat-label">Années Formation</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">50</span>
-                            <span>Collaborateurs</span>
-                        </div>
-                        <div class="stat-card">
+                            <div class="stat-icon">🏢</div>
                             <span class="stat-number">3</span>
-                            <span>Agences</span>
+                            <span class="stat-label">Entreprises Majeures</span>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🏗️</div>
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Grands Projets</span>
                         </div>
                     </div>
                 </div>
                 <div class="profile-image">
-                    <img src="{% static 'core/images/team.jpg' %}" alt="Notre équipe">
-                </div>
-            </div>
-        </section>
-
-        <section id="portfolio" class="section">
-            <h2 class="section-title">Nos Réalisations</h2>
-            <div class="portfolio-grid">
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <img src="{% static 'core/images/projects/project1.jpg' %}" alt="Gare Porte Maillot">
-                    <div class="project-info">
-                        <h3>Gare Porte Maillot</h3>
-                        <p>Réaménagement complet et restructuration.</p>
-                    </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="project-card">
-                    <img src="{% static 'core/images/projects/project2.jpg' %}" alt="Projet Résidentiel">
-                    <div class="project-info">
-                        <h3>Projet Résidentiel</h3>
-                        <p>Construction d'un complexe moderne et durable.</p>
-                    </div>
-                </div>
-                <!-- Placeholder -->
-                <div class="project-card">
-                    <div
-                        style="width:100%; height:250px; background-color:#ddd; display:flex; align-items:center; justify-content:center;">
-                        <span style="color:#888;">Projet en cours</span>
-                    </div>
-                    <div class="project-info">
-                        <h3>Extension Bureau</h3>
-                        <p>Optimisation de l'espace de travail.</p>
+                    <img src="{% static 'core/images/team.jpg' %}" alt="Lucas Gourmelon - Expert BTP">
+                    <div class="profile-badge">
+                        <span>Formateur Indépendant Certifié</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="services" class="section"
-            style="background-color: var(--section-bg-alt); border-radius: 20px; margin-bottom: 4rem; transition: background-color 0.3s;">
-            <h2 class="section-title">Nos Services</h2>
-            <p style="text-align: center; max-width: 600px; margin: 0 auto;">Choisissez ci-dessous pour planifier une
-                formation ou organiser le suivi de livrables projet.</p>
+        <!-- Experience Timeline Section -->
+        <section id="experience" class="section timeline-section">
+            <h2 class="section-title">Parcours Professionnel</h2>
+            <p class="section-subtitle">Une expertise forgée dans les plus grands groupes du BTP</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="company-logo">
+                            <span class="company-initial">N</span>
+                        </div>
+                        <h3>NGE Génie Civil</h3>
+                        <span class="timeline-role">Projeteur BIM</span>
+                        <p>Participation à de grands projets d'infrastructure. Développement des compétences en modélisation BIM et coordination technique.</p>
+                        <div class="timeline-tags">
+                            <span class="tag">Revit</span>
+                            <span class="tag">Infrastructure</span>
+                            <span class="tag">BIM</span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="action-buttons">
-                <a href="{% url 'formation' %}" class="btn-service">Formation</a>
-                <a href="{% url 'livrables' %}" class="btn-service">Livrables</a>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="company-logo eiffage">
+                            <span class="company-initial">E</span>
+                        </div>
+                        <h3>EIFFAGE Génie Civil - BIEP</h3>
+                        <span class="timeline-role">Modeleur BIM Référent → Responsable d'Affaires</span>
+                        <p>Evolution vers des responsabilités managériales. Développement et déploiement du gabarit Revit Open BIM interne. Formation des équipes de projeteurs.</p>
+                        <div class="timeline-highlight">
+                            <strong>💡 Réalisation phare :</strong> Développement du gabarit Revit Open BIM v.2021 du BIEP
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag">Revit</span>
+                            <span class="tag">Management</span>
+                            <span class="tag">Formation</span>
+                            <span class="tag">ArmaCAD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="company-logo sade">
+                            <span class="company-initial">S</span>
+                        </div>
+                        <h3>SADE CGTH Grands Projets</h3>
+                        <span class="timeline-role">Projeteur Principal</span>
+                        <p>Gestion de projets internationaux complexes. Expertise en ouvrages hydrauliques et infrastructures critiques.</p>
+                        <div class="timeline-tags">
+                            <span class="tag">International</span>
+                            <span class="tag">Hydraulique</span>
+                            <span class="tag">CAO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item current">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="company-logo current">
+                            <span class="company-initial">G</span>
+                        </div>
+                        <h3>Gourmelon BTP - Études & Formations</h3>
+                        <span class="timeline-role">Formateur Indépendant & Consultant BET</span>
+                        <p>Transmission de l'expertise métier et outils BIM. Accompagnement des entreprises dans leur transition numérique.</p>
+                        <div class="timeline-tags">
+                            <span class="tag">Formation</span>
+                            <span class="tag">Consulting</span>
+                            <span class="tag">BIM</span>
+                            <span class="tag">Accompagnement</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <footer style="text-align: center; padding: 2rem; background-color: var(--primary-color); color: white;">
-            <p>&copy; 2026 BTP Company. Tous droits réservés.</p>
+        <!-- Skills & Tools Section -->
+        <section id="competences" class="section skills-section">
+            <h2 class="section-title">Compétences & Outils Maîtrisés</h2>
+            <p class="section-subtitle">Une expertise technique complète au service de vos projets</p>
+            
+            <div class="skills-grid">
+                <!-- BIM & 3D -->
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <div class="skill-icon">🏗️</div>
+                        <h3>Modélisation BIM & 3D</h3>
+                    </div>
+                    <div class="skill-list">
+                        <div class="skill-item expert">
+                            <span class="skill-name">Autodesk Revit</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%"></div>
+                            </div>
+                            <span class="skill-badge">Expert</span>
+                        </div>
+                        <div class="skill-item advanced">
+                            <span class="skill-name">Navisworks</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-badge">Avancé</span>
+                        </div>
+                    </div>
+                    <p class="skill-description">
+                        Développement de gabarits BIM, modélisation complexe, coordination multi-disciplinaire, 
+                        extraction de livrables professionnels.
+                    </p>
+                </div>
+
+                <!-- CAO 2D -->
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <div class="skill-icon">📐</div>
+                        <h3>Dessin Technique 2D</h3>
+                    </div>
+                    <div class="skill-list">
+                        <div class="skill-item expert">
+                            <span class="skill-name">AutoCAD</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%"></div>
+                            </div>
+                            <span class="skill-badge">Expert</span>
+                        </div>
+                        <div class="skill-item expert">
+                            <span class="skill-name">ArmaCAD</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%"></div>
+                            </div>
+                            <span class="skill-badge">Expert</span>
+                        </div>
+                    </div>
+                    <p class="skill-description">
+                        Plans de coffrage, plans d'armatures, détails techniques, nomenclatures, 
+                        personnalisation et formation.
+                    </p>
+                </div>
+
+                <!-- Digital Tools -->
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <div class="skill-icon">💻</div>
+                        <h3>Outils Numériques</h3>
+                    </div>
+                    <div class="skill-list">
+                        <div class="skill-item advanced">
+                            <span class="skill-name">Plateformes CDE & GED</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-badge">Avancé</span>
+                        </div>
+                        <div class="skill-item advanced">
+                            <span class="skill-name">Excel Technique</span>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-badge">Avancé</span>
+                        </div>
+                    </div>
+                    <p class="skill-description">
+                        Gestion collaborative de projets, bases de données techniques, 
+                        automatisation et calculs métier.
+                    </p>
+                </div>
+
+                <!-- Technical Knowledge -->
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <div class="skill-icon">🔧</div>
+                        <h3>Savoirs Métiers</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tech-tag">Génie Civil</span>
+                        <span class="tech-tag">Béton Armé</span>
+                        <span class="tech-tag">Infrastructures</span>
+                        <span class="tech-tag">Ouvrages d'Art</span>
+                        <span class="tech-tag">Bâtiments Industriels</span>
+                        <span class="tech-tag">Normes Nucléaires</span>
+                        <span class="tech-tag">Coordination BIM</span>
+                        <span class="tech-tag">Gestion d'Affaires</span>
+                    </div>
+                    <p class="skill-description">
+                        Expertise complète du processus projet, de l'avant-projet à l'exécution et au DOE.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flagship Projects Section -->
+        <section id="projets" class="section projects-section">
+            <h2 class="section-title">Réalisations Phares</h2>
+            <p class="section-subtitle">Une sélection de projets d'envergure nationale et internationale</p>
+            
+            <div class="flagship-projects">
+                <!-- Project 1: CEA Cadarache -->
+                <div class="flagship-card">
+                    <div class="project-header">
+                        <div class="project-number">01</div>
+                        <div class="project-meta">
+                            <span class="project-client">CEA Cadarache</span>
+                            <span class="project-phase">Phase EXE</span>
+                        </div>
+                    </div>
+                    <!-- Image Removed as requested -->
+                    <div class="project-details">
+                        <h3>Lot Bâtiments CIRCE</h3>
+                        <p class="project-subtitle">Bâtiments d'isolement et bureaux d'exploitation</p>
+                        
+                        <div class="project-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Surface</span>
+                                <span class="spec-value">4 400 m²</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Type</span>
+                                <span class="spec-value">Bâtiments industriels</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Normes</span>
+                                <span class="spec-value">Contraintes nucléaires ASN</span>
+                            </div>
+                        </div>
+
+                        <p class="project-description">
+                            Groupement de bâtiments industriels suivant les contraintes et normes nucléaires 
+                            sous regard de l'Autorité de Sûreté Nucléaire.
+                        </p>
+
+                        <div class="project-role">
+                            <strong>Rôle :</strong> Responsable d'affaires - EIFFAGE BIEP
+                        </div>
+
+                        <div class="project-deliverables">
+                            <h4>Livrables produits</h4>
+                            <ul>
+                                <li>✓ 2 maquettes BIM complètes</li>
+                                <li>✓ 45 plans de coffrage</li>
+                                <li>✓ 95 plans d'armatures</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-tags">
+                            <span class="tag">Revit</span>
+                            <span class="tag">BIM</span>
+                            <span class="tag">Nucléaire</span>
+                            <span class="tag">Béton Armé</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: EOLE -->
+                <div class="flagship-card featured">
+                    <div class="project-header">
+                        <div class="project-number">02</div>
+                        <div class="project-meta">
+                            <span class="project-client">SNCF - EOLE</span>
+                            <span class="project-phase">Phase EXE / DOE</span>
+                        </div>
+                    </div>
+                    <!-- Image Removed as requested -->
+                    <div class="project-details">
+                        <h3>Gare Porte Maillot - RER E</h3>
+                        <p class="project-subtitle">Gare RER E en infrastructure et parking souterrain</p>
+                        
+                        <div class="project-specs impressive">
+                            <div class="spec-item">
+                                <span class="spec-label">Longueur</span>
+                                <span class="spec-value">150 m</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Largeur</span>
+                                <span class="spec-value">30 m</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Profondeur</span>
+                                <span class="spec-value">35 m</span>
+                            </div>
+                        </div>
+
+                        <p class="project-description">
+                            Ouvrage enterré de grande envergure nécessitant une coordination BIM rigoureuse 
+                            et une gestion complexe des phasages de construction.
+                        </p>
+
+                        <div class="project-role">
+                            <strong>Rôle :</strong> Projeteur référent responsable projet de la cellule graphique - EIFFAGE BIEP
+                        </div>
+
+                        <div class="project-deliverables">
+                            <h4>Livrables produits</h4>
+                            <ul>
+                                <li>✓ 2 maquettes BIM avec suivi coordonné</li>
+                                <li>✓ 200 plans de coffrage</li>
+                                <li>✓ 240 plans d'armatures</li>
+                                <li>✓ 10 plans de butons métalliques</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-highlight-box">
+                            <span class="highlight-icon">⭐</span>
+                            <p>Projet d'envergure nationale participant à l'extension du RER E vers l'ouest parisien</p>
+                        </div>
+
+                        <div class="project-tags">
+                            <span class="tag">Revit</span>
+                            <span class="tag">BIM</span>
+                            <span class="tag">Infrastructure</span>
+                            <span class="tag">Souterrain</span>
+                            <span class="tag">Coordination</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Cap-Vert -->
+                <div class="flagship-card">
+                    <div class="project-header">
+                        <div class="project-number">03</div>
+                        <div class="project-meta">
+                            <span class="project-client">Cap-Vert</span>
+                            <span class="project-phase">Phase PRO / EXE / DOE</span>
+                        </div>
+                    </div>
+                    <!-- Image Removed as requested -->
+                    <div class="project-details">
+                        <h3>Usines de Désalinisation</h3>
+                        <p class="project-subtitle">Deux usines sur les îles de Sal et São Vicente</p>
+                        
+                        <div class="project-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Capacité</span>
+                                <span class="spec-value">2 × 10 000 m³/j</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Localisation</span>
+                                <span class="spec-value">Cap-Vert</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Type</span>
+                                <span class="spec-value">Hydraulique</span>
+                            </div>
+                        </div>
+
+                        <p class="project-description">
+                            Projet international comprenant bâtiments process, stations de pompage, 
+                            filtres bicouches, bâtiments haute tension et ouvrages divers.
+                        </p>
+
+                        <div class="project-role">
+                            <strong>Rôle :</strong> Projeteur principal - SADE CGTH
+                        </div>
+
+                        <div class="project-deliverables">
+                            <h4>Livrables produits</h4>
+                            <ul>
+                                <li>✓ Plans de coffrage</li>
+                                <li>✓ Plans d'armatures</li>
+                                <li>✓ Plans de charpente métallique</li>
+                                <li>✓ Ouvrages process complexes</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-tags">
+                            <span class="tag">International</span>
+                            <span class="tag">Hydraulique</span>
+                            <span class="tag">Process</span>
+                            <span class="tag">Multi-phases</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training & Formation Section -->
+        <section id="formation" class="section formation-section">
+            <h2 class="section-title">Offre de Formation</h2>
+            <p class="section-subtitle">Des formations sur-mesure pour développer vos compétences BIM et techniques</p>
+            
+            <div class="formation-intro">
+                <div class="formation-experience">
+                    <div class="experience-badge">
+                        <span class="badge-number">6</span>
+                        <span class="badge-text">ans d'expérience</span>
+                    </div>
+                    <p>Formations internes, sous-traitants et organismes de formation sur les savoirs métiers et outils.</p>
+                </div>
+            </div>
+
+            <!-- Training Programs -->
+            <div class="training-programs">
+                <!-- BIM / Revit Training -->
+                <div class="training-card premium">
+                    <div class="training-icon">🏗️</div>
+                    <h3>Formation BIM & Revit</h3>
+                    <p class="training-description">
+                        Formation phasée en modules avec travaux dirigés sur gabarits structure et architecture, 
+                        gestion de projets et familles.
+                    </p>
+                    <div class="training-levels">
+                        <span class="level-badge">Initiation</span>
+                        <span class="level-badge">Intermédiaire</span>
+                        <span class="level-badge">Perfectionnement</span>
+                    </div>
+                    <div class="training-content">
+                        <h4>Contenu</h4>
+                        <ul>
+                            <li>Modélisation BIM structure et architecture</li>
+                            <li>Création de gabarits personnalisés</li>
+                            <li>Gestion de familles paramétriques</li>
+                            <li>Extraction de livrables professionnels</li>
+                            <li>Coordination et détection de clash</li>
+                        </ul>
+                    </div>
+                    <div class="training-tools">
+                        <span class="tool-tag">Revit</span>
+                        <span class="tool-tag">Navisworks</span>
+                        <span class="tool-tag">BIM 360</span>
+                    </div>
+                </div>
+
+                <!-- AutoCAD / ArmaCAD Training -->
+                <div class="training-card">
+                    <div class="training-icon">📐</div>
+                    <h3>Formation AutoCAD & ArmaCAD</h3>
+                    <p class="training-description">
+                        Maîtrise complète du dessin technique 2D, du plan d'architecture aux plans d'exécution béton armé.
+                    </p>
+                    <div class="training-levels">
+                        <span class="level-badge">Initiation</span>
+                        <span class="level-badge">Intermédiaire</span>
+                        <span class="level-badge">Perfectionnement</span>
+                    </div>
+                    <div class="training-content">
+                        <h4>Contenu</h4>
+                        <ul>
+                            <li>Fondamentaux du dessin technique</li>
+                            <li>Plans de coffrage et d'armatures</li>
+                            <li>Personnalisation et gabarits</li>
+                            <li>Nomenclatures et annotations</li>
+                            <li>Optimisation du workflow</li>
+                        </ul>
+                    </div>
+                    <div class="training-tools">
+                        <span class="tool-tag">AutoCAD</span>
+                        <span class="tool-tag">ArmaCAD</span>
+                    </div>
+                </div>
+
+                <!-- Complementary Training -->
+                <div class="training-card">
+                    <div class="training-icon">💻</div>
+                    <h3>Formations Complémentaires</h3>
+                    <p class="training-description">
+                        Modules associés pour une formation complète et contextualisée.
+                    </p>
+                    <div class="training-content">
+                        <h4>Modules disponibles</h4>
+                        <ul>
+                            <li>Excel technique intégré aux modules</li>
+                            <li>Technologie du BTP</li>
+                            <li>Environnement BIM numérique</li>
+                            <li>Coordination BIM multi-disciplinaire</li>
+                            <li>Plateformes CDE & GED</li>
+                        </ul>
+                    </div>
+                    <div class="training-highlight">
+                        <strong>✨ Spécialité :</strong> Contenus contextualisés selon vos besoins et projets spécifiques
+                    </div>
+                </div>
+
+                <!-- Corporate Training -->
+                <div class="training-card corporate">
+                    <div class="training-icon">🏢</div>
+                    <h3>Formation INTRA Entreprise</h3>
+                    <p class="training-description">
+                        Formations sur-mesure adaptées à votre contexte, vos projets et vos équipes.
+                    </p>
+                    <div class="training-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Contenus contextualisés</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Pédagogie personnalisée</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Présentiel, distanciel, hybride</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Méthodologies structurées</span>
+                        </div>
+                    </div>
+                    <div class="training-cta">
+                        <a href="{% url 'contact' %}" class="btn-training">Demander un devis</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training Organizations -->
+            <div class="training-partners">
+                <h3>Organismes de Formation Partenaires</h3>
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <div class="partner-name">CESI</div>
+                        <p>Formations BIM et Revit pour "Chargé d'Affaires BTP"</p>
+                    </div>
+                    <div class="partner-card">
+                        <div class="partner-name">Builders École</div>
+                        <p>Formation BIM Travaux pour Cycle 4 ingénieurs</p>
+                    </div>
+                    <div class="partner-card">
+                        <div class="partner-name">GRETA</div>
+                        <p>Modeleur BIM, Technicien d'études, AutoCAD intensif</p>
+                    </div>
+                    <div class="partner-card">
+                        <div class="partner-name">Organismes Privés</div>
+                        <p>Bachelor Coordinateur BIM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Corporate Clients -->
+            <div class="corporate-clients">
+                <h3>Formations en Entreprise</h3>
+                <div class="clients-showcase">
+                    <div class="client-experience">
+                        <div class="client-logo">EIFFAGE BIEP</div>
+                        <ul>
+                            <li>Formation outil ArmaCAD</li>
+                            <li>Formation Revit équipes de projeteurs</li>
+                        </ul>
+                    </div>
+                    <div class="client-experience">
+                        <div class="client-logo">ADS International</div>
+                        <ul>
+                            <li>Formation sur mesure ArmaCAD</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section services-section"
+            style="background-color: var(--section-bg-alt); border-radius: 20px; margin-bottom: 4rem;">
+            <h2 class="section-title">Réserver un Service</h2>
+            <p class="section-subtitle">Planifiez votre formation ou votre projet de livrables</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>Réserver une Formation</h3>
+                    <p>Planifiez votre formation BIM ou CAO avec notre calendrier de disponibilités</p>
+                    <ul class="service-features">
+                        <li>Choisir le programme de formation</li>
+                        <li>Voir les dates disponibles</li>
+                        <li>Réserver un créneau</li>
+                        <li>Recevoir une confirmation</li>
+                    </ul>
+                    <div class="service-action-hint">
+                        <span class="hint-icon">📅</span>
+                        <span>Accédez au calendrier de réservation</span>
+                    </div>
+                    <a href="{% url 'formation' %}" class="btn-service">
+                        Planifier une formation
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Demander un Projet BET</h3>
+                    <p>Planifiez votre projet de livrables techniques avec prise de rendez-vous</p>
+                    <ul class="service-features">
+                        <li>Décrire votre projet</li>
+                        <li>Choisir les livrables nécessaires</li>
+                        <li>Prendre rendez-vous</li>
+                        <li>Obtenir un devis personnalisé</li>
+                    </ul>
+                    <div class="service-action-hint">
+                        <span class="hint-icon">📅</span>
+                        <span>Accédez au formulaire de projet</span>
+                    </div>
+                    <a href="{% url 'livrables' %}" class="btn-service">
+                        Démarrer un projet
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="services-note">
+                <p>💡 <strong>Besoin d'aide pour choisir ?</strong> Consultez nos programmes de <a href="#formation">formation</a> ou nos <a href="#projets">réalisations</a> ci-dessus, puis revenez ici pour réserver.</p>
+            </div>
+        </section>
+
+        <!-- Contact CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Prêt à démarrer votre projet ?</h2>
+                <p>Contactez-nous pour discuter de vos besoins en formation ou en bureau d'études</p>
+                <div class="cta-buttons">
+                    <a href="{% url 'contact' %}" class="btn-cta-primary">Nous contacter</a>
+                    <a href="mailto:gourmelon.btp@gmail.com" class="btn-cta-secondary">
+                        📧 gourmelon.btp@gmail.com
+                    </a>
+                </div>
+                <p class="cta-phone">☎️ 06.16.47.28.32</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 3rem 2rem; background-color: var(--primary-color); color: white;">
+            <div class="footer-content">
+                <div class="footer-logo" style="margin-bottom: 1rem;">
+                    <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" style="height: 80px; filter: brightness(0) invert(1);">
+                </div>
+                <div class="footer-info">
+                    <h3 style="margin-bottom: 0.5rem;">Gourmelon BTP</h3>
+                </div>
+                <div class="footer-copyright">
+                    <p style="opacity: 0.7; font-size: 0.9rem;">&copy; 2026 Gourmelon BTP. Tous droits réservés.</p>
+                </div>
+            </div>
         </footer>
     </div> <!-- Close main-content wrapper -->
 
-    <script>
-        // Dark Mode Toggle Logic
-        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-        const currentTheme = localStorage.getItem('theme');
-
-        if (currentTheme) {
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            if (currentTheme === 'dark') {
-                toggleSwitch.checked = true;
-            }
-        }
-
-        function switchTheme(e) {
-            if (e.target.checked) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        toggleSwitch.addEventListener('change', switchTheme);
-
-        // Landing Page Orchestration
-        const landingPage = document.getElementById('landing-page');
-        const logo = document.getElementById('logo-image');
-        const welcomeText = landingPage.querySelector('.welcome-text');
-        const loadingScreen = document.getElementById('loading-screen');
-        const mainContent = document.getElementById('main-content');
-        const body = document.body;
-
-        // Ensure user can't scroll initially and content is hidden
-        body.style.overflow = 'hidden';
-
-        landingPage.addEventListener('click', () => {
-            // 1. Camera Zoom INTO Logo Effect
-            logo.classList.add('zoom-effect');
-            landingPage.classList.add('landing-fade');
-
-            // Fade out welcome text quickly
-            welcomeText.style.transition = 'opacity 0.3s ease';
-            welcomeText.style.opacity = '0';
-
-            // 2. Wait for zoom animation to complete (1.5s)
-            setTimeout(() => {
-                // Switch to Loading Screen
-                landingPage.style.display = 'none';
-                loadingScreen.style.display = 'flex';
-
-                // Fade in loader
-                setTimeout(() => {
-                    loadingScreen.classList.add('visible');
-                }, 50);
-
-                // 3. Loading Time then Reveal Main Content
-                setTimeout(() => {
-                    loadingScreen.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingScreen.style.display = 'none';
-                        // Show main content and restore scrolling
-                        mainContent.style.display = 'block';
-                        body.style.overflow = 'auto';
-                    }, 500); // Wait for fade out
-                }, 2000); // 2 seconds loading time
-
-            }, 1500); // Match CSS animation duration
-        });
-    </script>
-
+    <script src="{% static 'core/js/script.js' %}"></script>
+</body>
 </html>

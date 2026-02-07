@@ -5,20 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BTP - Contactez-nous</title>
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=1.1">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body style="overflow: auto;"> 
     <nav class="navbar">
         <div class="nav-logo">
             <a href="{% url 'index' %}">
-                <img src="{% static 'core/images/logo.jpg' %}" alt="BTP Logo">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" style="height: 40px; filter: brightness(0) invert(1) contrast(2) grayscale(1) brightness(0);">
             </a>
         </div>
         <div class="nav-links" style="display: flex; align-items: center;">
             <a href="{% url 'index' %}">Accueil</a>
             <a href="{% url 'index' %}#profil">Profil</a>
-            <a href="{% url 'index' %}#portfolio">Projets</a>
+            <a href="{% url 'index' %}#projets">Projets</a>
             <a href="{% url 'index' %}#services">Services</a>
             <a href="{% url 'contact' %}" class="active">Contact</a>
             
@@ -35,7 +35,7 @@
 
     <header class="hero-section">
         <h1>Contactez-nous</h1>
-        <p style="font-size: 1.2rem; margin-top: 1rem; color: #666;">Une question ? Un projet ? N'hésitez pas à nous écrire.</p>
+        <p style="font-size: 1.2rem; margin-top: 1rem; color: white; opacity: 0.9;">Une question ? Un projet ? N'hésitez pas à nous écrire.</p>
     </header>
 
     <section class="section contact-section">
@@ -44,15 +44,15 @@
                 <h3>Nos Coordonnées</h3>
                 <div class="info-item">
                     <span class="icon">📍</span>
-                    <p>123 Avenue de la Construction, Paris, 75000</p>
+                    <p>Paris / Île-de-France</p>
                 </div>
                 <div class="info-item">
                     <span class="icon">📞</span>
-                    <p>+33 1 23 45 67 89</p>
+                    <p>06.16.47.28.32</p>
                 </div>
                 <div class="info-item">
                     <span class="icon">✉️</span>
-                    <p>contact@btp-company.com</p>
+                    <p>gourmelon.btp@gmail.com</p>
                 </div>
             </div>
 
@@ -82,11 +82,20 @@
             </form>
         </div>
     </section>
-    
 
-
-    <footer style="text-align: center; padding: 2rem; background-color: var(--primary-color); color: white; margin-top: auto;">
-        <p>&copy; 2026 BTP Company. Tous droits réservés.</p>
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 2rem; background-color: var(--primary-color); color: white; margin-top: auto;">
+        <div class="footer-content">
+            <div class="footer-logo" style="margin-bottom: 1rem;">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" style="height: 70px; filter: brightness(0) invert(1);">
+            </div>
+            <div class="footer-info">
+                <h3 style="margin-bottom: 0.5rem;">Gourmelon BTP</h3>
+            </div>
+            <div class="footer-copyright">
+                <p style="opacity: 0.7; font-size: 0.9rem;">&copy; 2026 Gourmelon BTP. Tous droits réservés.</p>
+            </div>
+        </div>
     </footer>
 
     <script>

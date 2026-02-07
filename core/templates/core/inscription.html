@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BTP - Inscription</title>
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=1.1">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
@@ -14,11 +14,11 @@
     <nav class="navbar">
         <div class="nav-logo">
             <a href="{% url 'index' %}">
-                <img src="{% static 'core/images/logo.jpg' %}" alt="BTP Logo">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" style="height: 40px; filter: brightness(0) invert(1) contrast(2) grayscale(1) brightness(0);">
             </a>
         </div>
         <div class="nav-links">
-            <a href="{% url 'index' %}">Retour à l'accueil</a>
+            <a href="{% url 'index' %}" style="font-weight: 600;">← Retour à l'accueil</a>
         </div>
     </nav>
 
@@ -26,7 +26,7 @@
         <div class="registration-container">
             <div class="registration-header">
                 <h2>Inscription</h2>
-                <p>Créez votre compte pour commencer</p>
+                <p>Créez votre compte professionnel Gourmelon BTP</p>
             </div>
 
             <form class="contact-form" method="post">
@@ -45,17 +45,26 @@
 
                 <button type="submit" class="btn-register">Créer mon compte</button>
             </form>
-            <p
-                style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; opacity: 0; animation: fadeInStagger 0.5s ease-out 1s forwards;">
-                Déjà inscrit ? <a href="#"
-                    style="color: var(--primary-color); font-weight: 600; text-decoration: none;">Se connecter</a>
+            
+            <p style="text-align: center; margin-top: 2rem; font-size: 1rem; opacity: 0.8;">
+                Déjà inscrit ? <a href="#" style="color: var(--primary-color); font-weight: 700; text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.3s;" onmouseover="this.style.borderBottomColor='var(--primary-color)'" onmouseout="this.style.borderBottomColor='transparent'">Se connecter</a>
             </p>
         </div>
     </div>
 
-    <footer
-        style="text-align: center; padding: 2rem; background-color: var(--primary-color); color: white; margin-top: auto;">
-        <p>&copy; 2026 BTP Company. Tous droits réservés.</p>
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 2rem; background-color: var(--primary-color); color: white; margin-top: auto;">
+        <div class="footer-content">
+            <div class="footer-logo" style="margin-bottom: 1rem;">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" style="height: 70px; filter: brightness(0) invert(1);">
+            </div>
+            <div class="footer-info">
+                <h3 style="margin-bottom: 0.5rem;">Gourmelon BTP</h3>
+            </div>
+            <div class="footer-copyright">
+                <p style="opacity: 0.7; font-size: 0.9rem;">&copy; 2026 Gourmelon BTP. Tous droits réservés.</p>
+            </div>
+        </div>
     </footer>
 </body>
 

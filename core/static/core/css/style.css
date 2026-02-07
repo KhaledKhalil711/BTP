@@ -1799,3 +1799,121 @@ footer {
         gap: 3rem;
     }
 }
+
+/* ==========================================
+   Inscription / Registration Styles
+   ========================================== */
+.registration-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, rgba(0,51,102,0.05) 0%, rgba(255,165,0,0.05) 100%);
+}
+
+.registration-container {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 500px;
+    padding: 4rem;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px var(--card-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.registration-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.registration-header h2 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.registration-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.form-group-animated {
+    margin-bottom: 1.8rem;
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.form-group-animated:nth-child(1) { animation-delay: 0.2s; }
+.form-group-animated:nth-child(2) { animation-delay: 0.3s; }
+.form-group-animated:nth-child(3) { animation-delay: 0.4s; }
+.form-group-animated:nth-child(4) { animation-delay: 0.5s; }
+
+.form-group-animated label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.form-group-animated input {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    border: 2px solid var(--section-bg-alt);
+    border-radius: 15px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.form-group-animated input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background: var(--card-bg);
+    box-shadow: 0 10px 25px rgba(255, 165, 0, 0.1), 0 0 0 4px rgba(255, 165, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.helptext {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 0.5rem;
+}
+
+.btn-register {
+    width: 100%;
+    padding: 1.3rem;
+    border: none;
+    border-radius: 15px;
+    background: var(--gradient-primary);
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.4s;
+    box-shadow: 0 10px 30px rgba(0, 51, 102, 0.2);
+    margin-top: 1rem;
+}
+
+.btn-register:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 51, 102, 0.3);
+    filter: brightness(1.1);
+}
+
+@keyframes fadeInStagger {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Specific button in contact-form if used in registration context */
+.registration-container .contact-form {
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    border: none;
+}

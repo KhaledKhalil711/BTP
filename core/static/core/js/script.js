@@ -111,4 +111,80 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
+
+    // ==========================================
+    // Gallery Carousel Logic
+    // ==========================================
+    const carouselContainer = document.getElementById('main-carousel');
+    console.log("Carousel Container found:", !!carouselContainer);
+
+    if (carouselContainer) {
+        const slides = carouselContainer.querySelectorAll('.carousel-slide');
+        const dots = carouselContainer.querySelectorAll('.dot');
+        const prevBtn = carouselContainer.querySelector('.prev');
+        const nextBtn = carouselContainer.querySelector('.next');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            if (slides.length === 0) return;
+            
+            // Remove active from current
+            slides[currentSlide].classList.remove('active');
+            if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+            
+            // Set new index with wrapping
+            currentSlide = (index + slides.length) % slides.length;
+            
+            // Add active to new
+            slides[currentSlide].classList.add('active');
+            if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function startAutoPlay() {
+            stopAutoPlay(); // Safety clear
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoPlay() {
+            if (slideInterval) clearInterval(slideInterval);
+        }
+
+        // Event Listeners
+        if (nextBtn) {
+            nextBtn.onclick = () => {
+                nextSlide();
+                startAutoPlay();
+            };
+        }
+
+        if (prevBtn) {
+            prevBtn.onclick = () => {
+                prevSlide();
+                startAutoPlay();
+            };
+        }
+
+        dots.forEach((dot, idx) => {
+            dot.onclick = () => {
+                showSlide(idx);
+                startAutoPlay();
+            };
+        });
+
+        // Pause on hover
+        carouselContainer.onmouseenter = stopAutoPlay;
+        carouselContainer.onmouseleave = startAutoPlay;
+
+        // Initial Start
+        startAutoPlay();
+    }
 });

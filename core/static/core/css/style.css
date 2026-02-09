@@ -1022,7 +1022,7 @@ input:checked + .slider:before {
 
 .training-programs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin-bottom: 4rem;
 }
@@ -1798,6 +1798,151 @@ footer {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
+}
+
+/* ==========================================
+   Gallery Carousel Styles
+   ========================================== */
+.gallery-section .carousel-wrapper {
+    max-width: 1100px;
+    margin: 2rem auto;
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px var(--card-shadow);
+    background: #000;
+}
+
+.gallery-section .carousel-container {
+    position: relative;
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+}
+
+.gallery-section .carousel-track {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: block; /* Ensure it's not flex or anything else that could cause stacking */
+}
+
+.gallery-section .carousel-slide {
+    position: absolute !important; /* Force stacking */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.gallery-section .carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 5;
+}
+
+.gallery-section .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85);
+    display: block;
+}
+
+.gallery-section .slide-caption {
+    position: absolute;
+    bottom: 50px;
+    left: 40px;
+    z-index: 15; /* Higher than image (5) but lower than buttons (20) */
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+}
+
+.gallery-section .carousel-slide.active .slide-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-section .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.gallery-section .carousel-btn:hover {
+    background: var(--gradient-primary);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.gallery-section .carousel-btn.prev { left: 30px; }
+.gallery-section .carousel-btn.next { right: 30px; }
+
+.gallery-section .carousel-indicators {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 20;
+}
+
+.gallery-section .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid transparent;
+}
+
+.gallery-section .dot.active {
+    background: var(--accent-color);
+    width: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .gallery-section .carousel-container { height: 400px; }
+    .gallery-section .carousel-btn { width: 45px; height: 45px; font-size: 1.2rem; }
+    .gallery-section .carousel-btn.prev { left: 15px; }
+    .gallery-section .carousel-btn.next { right: 15px; }
 }
 
 /* ==========================================

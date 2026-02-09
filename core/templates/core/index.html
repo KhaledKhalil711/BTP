@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gourmelon BTP - Études & Formations | Expert BIM & Génie Civil</title>
     <meta name="description" content="11 ans d'expérience en BTP & Génie Civil. Formation BIM, Revit, AutoCAD. Bureau d'études techniques.">
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=1.4">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
@@ -124,6 +124,74 @@
                     <img src="{% static 'core/images/team.jpg' %}" alt="Lucas Gourmelon - Expert BTP">
                     <div class="profile-badge">
                         <span>Formateur Indépendant Certifié</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Carousel Section -->
+        <section class="section gallery-section">
+            <div class="carousel-wrapper">
+                <div class="carousel-container" id="main-carousel">
+                    <div class="carousel-track">
+                        <div class="carousel-slide active">
+                            <img src="{% static 'core/images/Used_Pictures/Vue ensemble MAQ.png' %}" alt="Vue d'ensemble MAQ">
+                            <div class="slide-caption">Vue d'ensemble 3D</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="{% static 'core/images/Used_Pictures/Vue MAQ Entrée R-2.jpg' %}" alt="Entrée de projet">
+                            <div class="slide-caption">Entrée de projet</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="{% static 'core/images/Used_Pictures/Vue MAQ Quais R-5.jpg' %}" alt="Quais de chargement">
+                            <div class="slide-caption">Quais de chargement rattachés</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="{% static 'core/images/Used_Pictures/20240621_132136.jpg' %}" alt="Chantier Vue 1">
+                            <div class="slide-caption">Chantier en cours - Vue globale</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="{% static 'core/images/Used_Pictures/20240621_132317.jpg' %}" alt="Chantier Vue 2">
+                            <div class="slide-caption">Suivi de réalisation</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="{% static 'core/images/Used_Pictures/20240621_133510.jpg' %}" alt="Chantier Vue 3">
+                            <div class="slide-caption">Infrastructure & Génie Civil</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="{% static 'core/images/Used_Pictures/20240621_134304.jpg' %}" alt="Chantier Vue 4">
+                            <div class="slide-caption">Coordination technique</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="{% static 'core/images/Used_Pictures/20240621_135449.jpg' %}" alt="Chantier Vue 5">
+                            <div class="slide-caption">Expertise structurelle</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="{% static 'core/images/Used_Pictures/20240621_140148.jpg' %}" alt="Chantier Vue 6">
+                            <div class="slide-caption">Détails d'exécution</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="{% static 'core/images/Used_Pictures/20240621_140745.jpg' %}" alt="Chantier Vue 7">
+                            <div class="slide-caption">Phase de finition</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button class="carousel-btn prev" aria-label="Previous slide">❮</button>
+                    <button class="carousel-btn next" aria-label="Next slide">❯</button>
+                    
+                    <!-- Indicators -->
+                    <div class="carousel-indicators">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                        <span class="dot" data-index="3"></span>
+                        <span class="dot" data-index="4"></span>
+                        <span class="dot" data-index="5"></span>
+                        <span class="dot" data-index="6"></span>
+                        <span class="dot" data-index="7"></span>
+                        <span class="dot" data-index="8"></span>
+                        <span class="dot" data-index="9"></span>
                     </div>
                 </div>
             </div>
@@ -763,6 +831,6 @@
         </footer>
     </div> <!-- Close main-content wrapper -->
 
-    <script src="{% static 'core/js/script.js' %}"></script>
+    <script src="{% static 'core/js/script.js' %}?v=1.1"></script>
 </body>
 </html>

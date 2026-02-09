@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gallery Carousel Logic
     // ==========================================
     const carouselContainer = document.getElementById('main-carousel');
-    console.log("Carousel Container found:", !!carouselContainer);
 
     if (carouselContainer) {
         const slides = carouselContainer.querySelectorAll('.carousel-slide');
@@ -160,29 +159,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Event Listeners
         if (nextBtn) {
-            nextBtn.onclick = () => {
+            nextBtn.addEventListener('click', () => {
                 nextSlide();
                 startAutoPlay();
-            };
+            });
         }
 
         if (prevBtn) {
-            prevBtn.onclick = () => {
+            prevBtn.addEventListener('click', () => {
                 prevSlide();
                 startAutoPlay();
-            };
+            });
         }
 
         dots.forEach((dot, idx) => {
-            dot.onclick = () => {
+            dot.addEventListener('click', () => {
                 showSlide(idx);
                 startAutoPlay();
-            };
+            });
         });
 
         // Pause on hover
-        carouselContainer.onmouseenter = stopAutoPlay;
-        carouselContainer.onmouseleave = startAutoPlay;
+        carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+        carouselContainer.addEventListener('mouseleave', startAutoPlay);
 
         // Initial Start
         startAutoPlay();

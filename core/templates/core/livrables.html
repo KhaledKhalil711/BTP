@@ -1,27 +1,352 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
-    <title>BTP - Livrables</title>
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livrables & Consulting - Gourmelon BTP</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=1.2">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body style="overflow: auto;">
+
+<body class="body-overflow-auto">
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-logo">
             <a href="{% url 'index' %}">
-                <img src="{% static 'core/images/logo.jpg' %}" alt="BTP Logo">
+                <img src="{% static 'core/images/logo.jpg' %}" alt="Gourmelon BTP" style="height: 50px;">
             </a>
         </div>
         <div class="nav-links">
-            <a href="{% url 'index' %}">Retour à l'accueil</a>
+            <a href="{% url 'index' %}">Accueil</a>
+            <a href="{% url 'formation' %}">Formations</a>
+            <a href="{% url 'livrables' %}" class="active">Livrables</a>
+            <a href="{% url 'contact' %}">Contact</a>
         </div>
     </nav>
-    <div class="section">
-        <h1 class="section-title">Livrables & Projets</h1>
-        <p style="text-align: center;">Espace de gestion des livrables...</p>
-        <!-- Content from PDF generic placeholder -->
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Consulting & Livrables BTP</h1>
+            <p class="hero-subtitle">Expertise technique et accompagnement de vos projets de construction</p>
+            <button class="btn-primary book-appointment-btn" data-type="livrables">Prendre rendez-vous</button>
+        </div>
+    </section>
+
+    <!-- Messages Django -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
     </div>
+    {% endif %}
+
+    <!-- Services Section -->
+    <section class="section services-section">
+        <div class="container">
+            <h2 class="section-title">Nos Services de Consulting</h2>
+            <p class="section-description">Accompagnement professionnel de vos projets BTP de A à Z</p>
+
+            <div class="formation-grid">
+                <!-- Service 1: Étude de Projet -->
+                <div class="formation-card reveal">
+                    <div class="card-ribbon">Essentiel</div>
+                    <div class="card-header">
+                        <h3>Étude de Projet</h3>
+                        <span class="badge badge-beginner">Pré-construction</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="description">Analyse complète de faisabilité, étude technique, et conseil sur l'orientation de votre projet de construction.</p>
+                        <div class="price-tag">Sur devis</div>
+                        <ul class="features">
+                            <li>✓ Analyse de faisabilité technique</li>
+                            <li>✓ Étude de terrain</li>
+                            <li>✓ Conseils réglementaires</li>
+                            <li>✓ Estimation budgétaire préliminaire</li>
+                            <li>✓ Recommandations techniques</li>
+                            <li>📄 Rapport d'étude détaillé</li>
+                        </ul>
+                        <button class="btn-formation book-appointment-btn" data-type="livrables">Demander un devis</button>
+                    </div>
+                </div>
+
+                <!-- Service 2: Plans & Métrés -->
+                <div class="formation-card reveal">
+                    <div class="card-header">
+                        <h3>Plans & Métrés</h3>
+                        <span class="badge badge-intermediate">Documents techniques</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="description">Réalisation de plans techniques détaillés et métrés précis pour votre projet de construction ou rénovation.</p>
+                        <div class="price-tag">À partir de 800€</div>
+                        <ul class="features">
+                            <li>✓ Plans d'exécution détaillés</li>
+                            <li>✓ Métrés quantitatifs</li>
+                            <li>✓ Plans de coupe et façades</li>
+                            <li>✓ Schémas techniques</li>
+                            <li>✓ Fichiers CAO/DAO</li>
+                            <li>📄 Dossier technique complet</li>
+                        </ul>
+                        <button class="btn-formation book-appointment-btn" data-type="livrables">Demander un devis</button>
+                    </div>
+                </div>
+
+                <!-- Service 3: Gestion de Projet -->
+                <div class="formation-card reveal">
+                    <div class="card-ribbon ribbon-premium">Premium</div>
+                    <div class="card-header">
+                        <h3>Gestion de Projet</h3>
+                        <span class="badge badge-advanced">Management</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="description">Coordination complète de votre projet: planning, budget, suivi de chantier, et gestion des corps d'état.</p>
+                        <div class="price-tag">Sur mesure</div>
+                        <ul class="features">
+                            <li>✓ Planification détaillée (Gantt)</li>
+                            <li>✓ Suivi budgétaire</li>
+                            <li>✓ Coordination des entreprises</li>
+                            <li>✓ Visites de chantier régulières</li>
+                            <li>✓ Rapports d'avancement</li>
+                            <li>📄 Documentation complète projet</li>
+                        </ul>
+                        <button class="btn-formation book-appointment-btn" data-type="livrables">Demander un devis</button>
+                    </div>
+                </div>
+
+                <!-- Service 4: Assistance Technique -->
+                <div class="formation-card reveal">
+                    <div class="card-header">
+                        <h3>Assistance Technique</h3>
+                        <span class="badge badge-special">Support</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="description">Support technique ponctuel ou récurrent pour résoudre vos problématiques BTP: diagnostic, expertise, solutions.</p>
+                        <div class="price-tag">150€/heure</div>
+                        <ul class="features">
+                            <li>✓ Diagnostic technique</li>
+                            <li>✓ Expertise pathologies</li>
+                            <li>✓ Solutions correctives</li>
+                            <li>✓ Accompagnement travaux</li>
+                            <li>✓ Conseils d'optimisation</li>
+                            <li>📄 Compte-rendu d'intervention</li>
+                        </ul>
+                        <button class="btn-formation book-appointment-btn" data-type="livrables">Demander un devis</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deliverables Section -->
+    <section class="section deliverables-section">
+        <div class="container">
+            <h2 class="section-title">Livrables Professionnels</h2>
+            <p class="section-description">Documents techniques de qualité professionnelle</p>
+
+            <div class="deliverables-grid">
+                <div class="deliverable-item reveal">
+                    <div class="deliverable-icon">📋</div>
+                    <h3>Dossiers d'Étude</h3>
+                    <ul>
+                        <li>Rapport de faisabilité</li>
+                        <li>Étude de sol</li>
+                        <li>Analyse réglementaire</li>
+                        <li>Pré-chiffrage détaillé</li>
+                    </ul>
+                </div>
+
+                <div class="deliverable-item reveal">
+                    <div class="deliverable-icon">📐</div>
+                    <h3>Plans Techniques</h3>
+                    <ul>
+                        <li>Plans architecturaux</li>
+                        <li>Plans d'exécution</li>
+                        <li>Plans de réseaux</li>
+                        <li>Détails constructifs</li>
+                    </ul>
+                </div>
+
+                <div class="deliverable-item reveal">
+                    <div class="deliverable-icon">📊</div>
+                    <h3>Documents de Gestion</h3>
+                    <ul>
+                        <li>Planning travaux (Gantt)</li>
+                        <li>Budget prévisionnel</li>
+                        <li>Tableau de bord</li>
+                        <li>Rapports d'avancement</li>
+                    </ul>
+                </div>
+
+                <div class="deliverable-item reveal">
+                    <div class="deliverable-icon">✅</div>
+                    <h3>Dossiers Réglementaires</h3>
+                    <ul>
+                        <li>Dossier permis de construire</li>
+                        <li>DOE (Dossier Ouvrage Exécuté)</li>
+                        <li>DIUO (sécurité)</li>
+                        <li>Attestations et certificats</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section process-section">
+        <div class="container">
+            <h2 class="section-title">Notre Processus de Travail</h2>
+            <div class="process-timeline">
+                <div class="process-step reveal">
+                    <div class="step-number">1</div>
+                    <h3>Rendez-vous Initial</h3>
+                    <p>Analyse de vos besoins et présentation de nos services</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-number">2</div>
+                    <h3>Proposition</h3>
+                    <p>Devis détaillé et planning prévisionnel</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-number">3</div>
+                    <h3>Réalisation</h3>
+                    <p>Exécution des prestations avec suivi régulier</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-number">4</div>
+                    <h3>Livraison</h3>
+                    <p>Remise des livrables et présentation finale</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section why-choose-section">
+        <div class="container">
+            <h2 class="section-title">Pourquoi nous choisir ?</h2>
+            <div class="features-grid">
+                <div class="feature-item reveal">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Expertise confirmée</h3>
+                    <p>11 ans d'expérience terrain et bureau d'études</p>
+                </div>
+                <div class="feature-item reveal">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Réactivité</h3>
+                    <p>Délais respectés et communication transparente</p>
+                </div>
+                <div class="feature-item reveal">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Précision</h3>
+                    <p>Documents techniques détaillés et conformes</p>
+                </div>
+                <div class="feature-item reveal">
+                    <div class="feature-icon">💡</div>
+                    <h3>Conseil personnalisé</h3>
+                    <p>Solutions adaptées à votre projet et budget</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Prêt à lancer votre projet ?</h2>
+            <p>Discutons de vos besoins lors d'un rendez-vous personnalisé</p>
+            <button class="btn-primary btn-large book-appointment-btn" data-type="livrables">Prendre rendez-vous</button>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Prendre rendez-vous</h2>
+            <p class="modal-description">Choisissez une date et un créneau horaire pour discuter de votre projet.</p>
+
+            <form method="post" class="booking-form" novalidate>
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                        {{ form.name }}
+                        {{ form.name.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+                    {{ form.phone }}
+                    {{ form.phone.errors }}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.appointment_date.id_for_label }}">{{ form.appointment_date.label }}</label>
+                        {{ form.appointment_date }}
+                        <small>Lundi à vendredi uniquement</small>
+                        {{ form.appointment_date.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.appointment_time.id_for_label }}">{{ form.appointment_time.label }}</label>
+                        {{ form.appointment_time }}
+                        <small>9h à 16h</small>
+                        {{ form.appointment_time.errors }}
+                    </div>
+                </div>
+
+                <div id="time-slots-container" class="time-slots-container"></div>
+                <div id="selected-time-display" class="selected-time-display" style="display:none;"></div>
+
+                <div class="form-group">
+                    <label for="{{ form.subject.id_for_label }}">{{ form.subject.label }}</label>
+                    {{ form.subject }}
+                    <small>Type de service souhaité (Étude, Plans, Gestion, Assistance...)</small>
+                    {{ form.subject.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.notes.id_for_label }}">{{ form.notes.label }}</label>
+                    {{ form.notes }}
+                    {{ form.notes.errors }}
+                </div>
+
+                <button type="submit" class="btn-submit">Confirmer le rendez-vous</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="footer-content">
+            <div class="footer-logo footer-logo-container">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" class="footer-logo-img">
+            </div>
+            <div class="footer-info">
+                <h3 class="footer-title">Gourmelon BTP</h3>
+                <p>Consulting et livrables BTP - 11 ans d'expérience</p>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 Gourmelon BTP. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'core/js/script.js' %}"></script>
+    <script src="{% static 'core/js/calendar.js' %}"></script>
 </body>
+
 </html>

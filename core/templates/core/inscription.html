@@ -10,15 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
-<body style="overflow: auto;">
+<body class="body-overflow-auto">
     <nav class="navbar">
         <div class="nav-logo">
             <a href="{% url 'index' %}">
-                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" style="height: 40px; filter: brightness(0) invert(1) contrast(2) grayscale(1) brightness(0);">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" class="nav-logo-img">
             </a>
         </div>
         <div class="nav-links">
-            <a href="{% url 'index' %}" style="font-weight: 600;">← Retour à l'accueil</a>
+            <a href="{% url 'index' %}" class="nav-link-bold">← Retour à l'accueil</a>
         </div>
     </nav>
 
@@ -46,23 +46,23 @@
                 <button type="submit" class="btn-register">Créer mon compte</button>
             </form>
             
-            <p style="text-align: center; margin-top: 2rem; font-size: 1rem; opacity: 0.8;">
-                Déjà inscrit ? <a href="#" style="color: var(--primary-color); font-weight: 700; text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.3s;" onmouseover="this.style.borderBottomColor='var(--primary-color)'" onmouseout="this.style.borderBottomColor='transparent'">Se connecter</a>
+            <p class="login-prompt">
+                Déjà inscrit ? <a href="#" class="login-link">Se connecter</a>
             </p>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer style="text-align: center; padding: 3rem 2rem; background-color: var(--primary-color); color: white; margin-top: auto;">
+    <footer class="footer-main">
         <div class="footer-content">
-            <div class="footer-logo" style="margin-bottom: 1rem;">
-                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" style="height: 70px; filter: brightness(0) invert(1);">
+            <div class="footer-logo footer-logo-container">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" class="footer-logo-img">
             </div>
             <div class="footer-info">
-                <h3 style="margin-bottom: 0.5rem;">Gourmelon BTP</h3>
+                <h3 class="footer-title">Gourmelon BTP</h3>
             </div>
             <div class="footer-copyright">
-                <p style="opacity: 0.7; font-size: 0.9rem;">&copy; 2026 Gourmelon BTP. Tous droits réservés.</p>
+                <p>&copy; 2026 Gourmelon BTP. Tous droits réservés.</p>
             </div>
         </div>
     </footer>

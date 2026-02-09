@@ -1,72 +1,268 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
-    <title>BTP - Formation</title>
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formations BTP - Gourmelon BTP</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=1.2">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body style="overflow: auto;">
+<body class="body-overflow-auto">
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-logo">
             <a href="{% url 'index' %}">
-                <img src="{% static 'core/images/logo.jpg' %}" alt="BTP Logo">
+                <img src="{% static 'core/images/logo.jpg' %}" alt="Gourmelon BTP" style="height: 50px;">
             </a>
         </div>
         <div class="nav-links">
-            <a href="{% url 'index' %}">Retour à l'accueil</a>
+            <a href="{% url 'index' %}">Accueil</a>
+            <a href="{% url 'formation' %}" class="active">Formations</a>
+            <a href="{% url 'livrables' %}">Livrables</a>
+            <a href="{% url 'contact' %}">Contact</a>
         </div>
     </nav>
-    <div class="section">
-        <h1 class="section-title">Nos Formations</h1>
-        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">Découvrez nos programmes de formation
-            professionnelle adaptés à tous les niveaux.</p>
 
-        <div class="formation-grid">
-            <!-- Niveau Débutant -->
-            <div class="formation-card">
-                <div class="card-header">
-                    <h2>Niveau Débutant</h2>
-                    <span class="badge">Fondamentaux</span>
-                </div>
-                <div class="card-body">
-                    <p class="description">Introduction aux bases du bâtiment, sécurité sur chantier, et lecture de
-                        plans simples. Idéal pour ceux qui débutent dans le secteur.</p>
-                    <div class="price-tag">1500€</div>
-                    <ul class="features">
-                        <li>Sécurité BTP</li>
-                        <li>Outillage de base</li>
-                        <li>Lecture de plans niv.1</li>
-                        <li>Durée: 2 semaines</li>
-                    </ul>
-                    <a href="{% url 'inscription' %}" class="btn-formation">S'inscrire</a>
-                </div>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Formations Professionnelles BTP</h1>
+            <p class="hero-subtitle">11 ans d'expérience pour vous former aux métiers du bâtiment</p>
+            <button class="btn-primary book-appointment-btn" data-type="formation">Réserver un rendez-vous</button>
+        </div>
+    </section>
 
-            <!-- Niveau Intermédiaire -->
-            <div class="formation-card">
-                <div class="card-header">
-                    <h2>Niveau Intermédiaire</h2>
-                    <span class="badge">Perfectionnement</span>
+    <!-- Messages Django -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Formations Section -->
+    <section class="section formations-section">
+        <div class="container">
+            <h2 class="section-title">Nos Programmes de Formation</h2>
+            <p class="section-description">Des formations adaptées à tous les niveaux, du débutant au chef de chantier</p>
+
+            <div class="formation-grid">
+                <!-- Formation 1: Niveau Débutant -->
+                <div class="formation-card reveal">
+                    <div class="card-ribbon">Populaire</div>
+                    <div class="card-header">
+                        <h3>Fondamentaux du BTP</h3>
+                        <span class="badge badge-beginner">Débutant</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="description">Introduction complète aux bases du bâtiment, sécurité sur chantier, et lecture de plans. Parfait pour démarrer votre carrière dans le BTP.</p>
+                        <div class="price-tag">1 500€</div>
+                        <ul class="features">
+                            <li>✓ Sécurité sur chantier (CSPS)</li>
+                            <li>✓ Outillage et matériaux de base</li>
+                            <li>✓ Lecture de plans niveau 1</li>
+                            <li>✓ Techniques de maçonnerie basique</li>
+                            <li>✓ Gestes et postures</li>
+                            <li>⏱ Durée: 2 semaines (70h)</li>
+                        </ul>
+                        <button class="btn-formation book-appointment-btn" data-type="formation">Réserver ma place</button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="description">Techniques avancées de maçonnerie, gestion d'équipe, et utilisation d'outils
-                        complexes. Pour les professionnels souhaitant monter en compétences.</p>
-                    <div class="price-tag">2500€</div>
-                    <ul class="features">
-                        <li>Maçonnerie complexe</li>
-                        <li>Gestion d'équipe</li>
-                        <li>Lecture de plans niv.2</li>
-                        <li>Durée: 4 semaines</li>
-                    </ul>
-                    <a href="{% url 'inscription' %}" class="btn-formation">S'inscrire</a>
+
+                <!-- Formation 2: Niveau Intermédiaire -->
+                <div class="formation-card reveal">
+                    <div class="card-header">
+                        <h3>Perfectionnement BTP</h3>
+                        <span class="badge badge-intermediate">Intermédiaire</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="description">Techniques avancées de construction, gestion d'équipe, et maîtrise d'outils complexes. Pour professionnels souhaitant évoluer.</p>
+                        <div class="price-tag">2 500€</div>
+                        <ul class="features">
+                            <li>✓ Maçonnerie complexe</li>
+                            <li>✓ Gestion d'équipe et planning</li>
+                            <li>✓ Lecture de plans niveau 2</li>
+                            <li>✓ Utilisation engins de chantier</li>
+                            <li>✓ Coordination des corps d'état</li>
+                            <li>⏱ Durée: 4 semaines (140h)</li>
+                        </ul>
+                        <button class="btn-formation book-appointment-btn" data-type="formation">Réserver ma place</button>
+                    </div>
+                </div>
+
+                <!-- Formation 3: Niveau Avancé -->
+                <div class="formation-card reveal">
+                    <div class="card-ribbon ribbon-premium">Premium</div>
+                    <div class="card-header">
+                        <h3>Chef de Chantier</h3>
+                        <span class="badge badge-advanced">Avancé</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="description">Formation complète pour devenir chef de chantier: gestion de projet, budget, réglementation, et management d'équipe.</p>
+                        <div class="price-tag">4 000€</div>
+                        <ul class="features">
+                            <li>✓ Gestion de projet BTP</li>
+                            <li>✓ Budget et devis</li>
+                            <li>✓ Réglementation et normes</li>
+                            <li>✓ Management d'équipe</li>
+                            <li>✓ Qualité et sécurité</li>
+                            <li>⏱ Durée: 6 semaines (210h)</li>
+                        </ul>
+                        <button class="btn-formation book-appointment-btn" data-type="formation">Réserver ma place</button>
+                    </div>
+                </div>
+
+                <!-- Formation 4: Spécialisation -->
+                <div class="formation-card reveal">
+                    <div class="card-header">
+                        <h3>Spécialisation Technique</h3>
+                        <span class="badge badge-special">Spécialisation</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="description">Modules spécialisés: isolation thermique, étanchéité, plomberie, électricité, ou menuiserie. Choisissez votre domaine d'expertise.</p>
+                        <div class="price-tag">1 800€</div>
+                        <ul class="features">
+                            <li>✓ Module au choix</li>
+                            <li>✓ Pratique intensive</li>
+                            <li>✓ Certification professionnelle</li>
+                            <li>✓ Mise en situation réelle</li>
+                            <li>✓ Suivi personnalisé</li>
+                            <li>⏱ Durée: 3 semaines (105h)</li>
+                        </ul>
+                        <button class="btn-formation book-appointment-btn" data-type="formation">Réserver ma place</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section why-choose-section">
+        <div class="container">
+            <h2 class="section-title">Pourquoi choisir nos formations ?</h2>
+            <div class="features-grid">
+                <div class="feature-item reveal">
+                    <div class="feature-icon">🎯</div>
+                    <h3>11 ans d'expérience</h3>
+                    <p>Expert reconnu avec plus d'une décennie dans le BTP</p>
+                </div>
+                <div class="feature-item reveal">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>Formation pratique</h3>
+                    <p>80% de pratique sur chantier réel</p>
+                </div>
+                <div class="feature-item reveal">
+                    <div class="feature-icon">📜</div>
+                    <h3>Certification officielle</h3>
+                    <p>Diplômes reconnus par la profession</p>
+                </div>
+                <div class="feature-item reveal">
+                    <div class="feature-icon">💼</div>
+                    <h3>Accompagnement emploi</h3>
+                    <p>Aide au placement professionnel</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Prêt à démarrer votre formation ?</h2>
+            <p>Prenez rendez-vous pour discuter de vos objectifs professionnels</p>
+            <button class="btn-primary btn-large book-appointment-btn" data-type="formation">Réserver un rendez-vous</button>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Réserver un rendez-vous</h2>
+            <p class="modal-description">Choisissez une date et un créneau horaire pour discuter de votre projet de formation.</p>
+
+            <form method="post" class="booking-form" novalidate>
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                        {{ form.name }}
+                        {{ form.name.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+                    {{ form.phone }}
+                    {{ form.phone.errors }}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.appointment_date.id_for_label }}">{{ form.appointment_date.label }}</label>
+                        {{ form.appointment_date }}
+                        <small>Lundi à vendredi uniquement</small>
+                        {{ form.appointment_date.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.appointment_time.id_for_label }}">{{ form.appointment_time.label }}</label>
+                        {{ form.appointment_time }}
+                        <small>9h à 16h</small>
+                        {{ form.appointment_time.errors }}
+                    </div>
+                </div>
+
+                <div id="time-slots-container" class="time-slots-container"></div>
+                <div id="selected-time-display" class="selected-time-display" style="display:none;"></div>
+
+                <div class="form-group">
+                    <label for="{{ form.subject.id_for_label }}">{{ form.subject.label }}</label>
+                    {{ form.subject }}
+                    {{ form.subject.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.notes.id_for_label }}">{{ form.notes.label }}</label>
+                    {{ form.notes }}
+                    {{ form.notes.errors }}
+                </div>
+
+                <button type="submit" class="btn-submit">Confirmer le rendez-vous</button>
+            </form>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="footer-content">
+            <div class="footer-logo footer-logo-container">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" class="footer-logo-img">
+            </div>
+            <div class="footer-info">
+                <h3 class="footer-title">Gourmelon BTP</h3>
+                <p>Formations professionnelles BTP - 11 ans d'expérience</p>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 Gourmelon BTP. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'core/js/script.js' %}"></script>
+    <script src="{% static 'core/js/calendar.js' %}"></script>
 </body>
 
 </html>

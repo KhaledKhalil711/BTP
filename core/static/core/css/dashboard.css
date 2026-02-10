@@ -1,0 +1,655 @@
+/* ===================================
+   Dashboard Styles - Gourmelon BTP
+   Supplements style.css
+   =================================== */
+
+/* Dashboard Hero */
+.dashboard-hero {
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    background: var(--gradient-primary);
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.dashboard-hero h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+}
+
+.dashboard-hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Dashboard Stats Row */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0 2rem;
+}
+
+.stat-card-dashboard {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    transition: transform 0.3s ease;
+    border-top: 4px solid var(--primary-color);
+}
+
+.stat-card-dashboard:hover {
+    transform: translateY(-3px);
+}
+
+.stat-card-dashboard.stat-pending {
+    border-top-color: #f0ad4e;
+}
+
+.stat-card-dashboard.stat-confirmed {
+    border-top-color: #5cb85c;
+}
+
+.stat-card-dashboard.stat-formation {
+    border-top-color: var(--accent-color);
+}
+
+.stat-number-dashboard {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label-dashboard {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    font-weight: 500;
+}
+
+/* Filter Buttons */
+.dashboard-filters {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 25px;
+    background: transparent;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    font-family: 'Outfit', sans-serif;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Appointments Table (Desktop) */
+.appointments-table-wrapper {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+    overflow-x: auto;
+}
+
+.appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.appointments-table thead {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.appointments-table th {
+    padding: 1rem 1.2rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.appointments-table td {
+    padding: 1rem 1.2rem;
+    text-align: left;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--section-bg-alt);
+    color: var(--text-color);
+}
+
+.appointments-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.appointments-table tbody tr:hover {
+    background: var(--section-bg-alt);
+}
+
+.appointments-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Type Badges */
+.type-badge {
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.type-formation {
+    background: var(--gradient-accent);
+    color: white;
+}
+
+.type-livrables {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-confirmed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-completed {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+/* Actions Cell */
+.actions-cell {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.btn-email {
+    background: var(--gradient-accent);
+    color: white;
+}
+
+.btn-email:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Status Dropdown */
+.status-form {
+    display: inline-block;
+}
+
+.status-select {
+    padding: 0.4rem 0.6rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.status-select:hover,
+.status-select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Logout Button */
+.btn-logout {
+    padding: 0.5rem 1rem;
+    background: #dc3545 !important;
+    color: white !important;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+    background: #c82333 !important;
+    transform: translateY(-1px);
+}
+
+/* Mobile Cards (hidden on desktop) */
+.appointments-cards {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+}
+
+.appointment-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px var(--card-shadow);
+}
+
+.appointment-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.appointment-card-body {
+    margin-bottom: 1rem;
+}
+
+.appointment-card-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.3rem;
+    color: var(--text-color);
+}
+
+.appointment-card-email,
+.appointment-card-phone,
+.appointment-card-date,
+.appointment-card-subject {
+    font-size: 0.9rem;
+    margin: 0 0 0.2rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.appointment-card-date {
+    font-weight: 600;
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+.appointment-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    border-top: 1px solid var(--section-bg-alt);
+}
+
+/* Email Form Page */
+.dashboard-section {
+    padding: 2rem 0 3rem;
+}
+
+.email-form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.email-form-header {
+    margin-bottom: 1.5rem;
+}
+
+.email-form-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 0.5rem;
+}
+
+.email-form-header p {
+    font-size: 1rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin: 0;
+}
+
+.appointment-context-card {
+    background: var(--section-bg-alt);
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--accent-color);
+}
+
+.context-card-header {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.appointment-context-card p {
+    margin: 0 0 0.3rem;
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+.email-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.btn-back {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.3s;
+}
+
+.btn-back:hover {
+    opacity: 0.7;
+}
+
+/* Field Error */
+.field-error {
+    color: #dc3545;
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 0.3rem;
+}
+
+/* Email History */
+.email-history {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--section-bg-alt);
+}
+
+.email-history h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 1.5rem;
+}
+
+.email-history-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px var(--card-shadow);
+    border-left: 3px solid var(--primary-color);
+}
+
+.email-history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.email-history-header strong {
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.email-history-date {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+.email-history-body {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-color);
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    opacity: 0.6;
+}
+
+.empty-state p {
+    font-size: 1rem;
+    opacity: 0.5;
+    margin: 0;
+}
+
+/* Alert styles for dashboard */
+.alert {
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Password change form styling */
+.registration-section .form-group-animated input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    background: var(--card-bg);
+    color: var(--text-color);
+    transition: border-color 0.3s;
+}
+
+.registration-section .form-group-animated input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.helptext {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.5;
+    margin-top: 0.3rem;
+    line-height: 1.4;
+}
+
+.helptext ul {
+    margin: 0.3rem 0 0;
+    padding-left: 1.2rem;
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+
+@media (max-width: 768px) {
+    .dashboard-hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-number-dashboard {
+        font-size: 2rem;
+    }
+
+    .dashboard-filters {
+        padding: 0 1rem;
+    }
+
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    /* Hide table, show cards */
+    .appointments-table-wrapper {
+        display: none;
+    }
+
+    .appointments-cards {
+        display: block;
+    }
+
+    .email-form-container {
+        padding: 0 1rem;
+    }
+
+    .email-form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-back {
+        text-align: center;
+    }
+
+    /* Dashboard navbar adjustments */
+    .navbar .nav-links {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-hero {
+        padding: 2rem 1rem;
+    }
+
+    .dashboard-hero h1 {
+        font-size: 1.3rem;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+        padding: 0 1rem;
+    }
+
+    .stat-card-dashboard {
+        padding: 1rem;
+    }
+
+    .stat-number-dashboard {
+        font-size: 1.8rem;
+    }
+
+    .appointment-card {
+        padding: 1rem;
+    }
+
+    .appointment-card-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-action {
+        text-align: center;
+    }
+
+    .email-history-header {
+        flex-direction: column;
+    }
+}

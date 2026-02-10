@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tableau de Bord{% endblock %} - Gourmelon BTP</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=1.1">
+    <link rel="stylesheet" href="{% static 'core/css/dashboard.css' %}?v=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="body-overflow-auto">
+    <nav class="navbar">
+        <div class="nav-logo">
+            <a href="{% url 'dashboard_home' %}">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'dashboard_home' %}" class="nav-link-bold">Rendez-vous</a>
+            <a href="{% url 'dashboard_password_change' %}" class="nav-link-bold">Mon Compte</a>
+            <a href="{% url 'dashboard_logout' %}" class="btn-logout">D&eacute;connexion</a>
+            <div class="theme-switch-wrapper" style="margin-left: 1rem;">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
+        </div>
+    </nav>
+
+    {% if messages %}
+    <div class="messages-container" style="max-width: 1200px; margin: 1rem auto; padding: 0 2rem;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer-main">
+        <div class="footer-content">
+            <div class="footer-logo footer-logo-container">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" class="footer-logo-img">
+            </div>
+            <div class="footer-info">
+                <h3 class="footer-title">Gourmelon BTP</h3>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 Gourmelon BTP. Tous droits r&eacute;serv&eacute;s.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'core/js/script.js' %}"></script>
+    <script src="{% static 'core/js/dashboard.js' %}"></script>
+    <script>
+        // Dark mode toggle (same logic as contact.html)
+        const toggleSwitch = document.querySelector('#checkbox');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        if (currentTheme === 'dark') {
+            toggleSwitch.checked = true;
+        }
+        toggleSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+</body>
+
+</html>

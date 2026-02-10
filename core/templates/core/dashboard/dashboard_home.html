@@ -1,0 +1,145 @@
+{% extends "core/dashboard/base_dashboard.html" %}
+{% load static %}
+
+{% block title %}Tableau de Bord{% endblock %}
+
+{% block content %}
+<header class="dashboard-hero">
+    <h1>Bonjour, {{ user.first_name|default:user.username }} !</h1>
+    <p>Votre tableau de bord Gourmelon BTP</p>
+</header>
+
+<!-- Stats Row -->
+<div class="dashboard-stats">
+    <div class="stat-card-dashboard">
+        <span class="stat-number-dashboard">{{ total_count }}</span>
+        <span class="stat-label-dashboard">Total Rendez-vous</span>
+    </div>
+    <div class="stat-card-dashboard stat-pending">
+        <span class="stat-number-dashboard">{{ pending_count }}</span>
+        <span class="stat-label-dashboard">En attente</span>
+    </div>
+    <div class="stat-card-dashboard stat-confirmed">
+        <span class="stat-number-dashboard">{{ confirmed_count }}</span>
+        <span class="stat-label-dashboard">Confirm&eacute;s</span>
+    </div>
+    <div class="stat-card-dashboard stat-formation">
+        <span class="stat-number-dashboard">{{ formation_count }}</span>
+        <span class="stat-label-dashboard">Formations</span>
+    </div>
+</div>
+
+<!-- Filter Buttons -->
+<div class="dashboard-filters">
+    <button class="filter-btn active" data-filter="all">Tous</button>
+    <button class="filter-btn" data-filter="formation">Formations</button>
+    <button class="filter-btn" data-filter="livrables">Projets / Livrables</button>
+    <button class="filter-btn" data-filter="pending">En attente</button>
+    <button class="filter-btn" data-filter="confirmed">Confirm&eacute;s</button>
+    <button class="filter-btn" data-filter="completed">Termin&eacute;s</button>
+</div>
+
+<!-- Desktop Table -->
+<div class="appointments-table-wrapper">
+    <table class="appointments-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>T&eacute;l&eacute;phone</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr data-type="{{ appointment.appointment_type }}" data-status="{{ appointment.status }}">
+                <td>
+                    <span class="type-badge type-{{ appointment.appointment_type }}">
+                        {{ appointment.get_appointment_type_display }}
+                    </span>
+                </td>
+                <td>{{ appointment.name }}</td>
+                <td>{{ appointment.email }}</td>
+                <td>{{ appointment.phone|default:"-" }}</td>
+                <td>{{ appointment.appointment_date|date:"d/m/Y" }} &agrave; {{ appointment.appointment_time|time:"H:i" }}</td>
+                <td>
+                    <span class="status-badge status-{{ appointment.status }}">
+                        {{ appointment.get_status_display }}
+                    </span>
+                </td>
+                <td class="actions-cell">
+                    <a href="{% url 'dashboard_send_email' appointment.pk %}" class="btn-action btn-email">Envoyer email</a>
+                    <form method="post" action="{% url 'dashboard_update_status' appointment.pk %}" class="status-form">
+                        {% csrf_token %}
+                        <select name="status" class="status-select">
+                            <option value="">Changer...</option>
+                            <option value="confirmed">Confirmer</option>
+                            <option value="cancelled">Annuler</option>
+                            <option value="completed">Terminer</option>
+                        </select>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">
+                    <div class="empty-state">
+                        <div class="empty-icon">&#128197;</div>
+                        <h3>Aucun rendez-vous</h3>
+                        <p>Les rendez-vous pris sur votre site appara&icirc;tront ici.</p>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Mobile Cards (shown on small screens) -->
+<div class="appointments-cards">
+    {% for appointment in appointments %}
+    <div class="appointment-card" data-type="{{ appointment.appointment_type }}" data-status="{{ appointment.status }}">
+        <div class="appointment-card-header">
+            <span class="type-badge type-{{ appointment.appointment_type }}">
+                {{ appointment.get_appointment_type_display }}
+            </span>
+            <span class="status-badge status-{{ appointment.status }}">
+                {{ appointment.get_status_display }}
+            </span>
+        </div>
+        <div class="appointment-card-body">
+            <p class="appointment-card-name">{{ appointment.name }}</p>
+            <p class="appointment-card-email">{{ appointment.email }}</p>
+            {% if appointment.phone %}
+            <p class="appointment-card-phone">{{ appointment.phone }}</p>
+            {% endif %}
+            <p class="appointment-card-date">{{ appointment.appointment_date|date:"d/m/Y" }} &agrave; {{ appointment.appointment_time|time:"H:i" }}</p>
+            {% if appointment.subject %}
+            <p class="appointment-card-subject"><strong>Sujet:</strong> {{ appointment.subject }}</p>
+            {% endif %}
+        </div>
+        <div class="appointment-card-actions">
+            <a href="{% url 'dashboard_send_email' appointment.pk %}" class="btn-action btn-email">Envoyer email</a>
+            <form method="post" action="{% url 'dashboard_update_status' appointment.pk %}" class="status-form">
+                {% csrf_token %}
+                <select name="status" class="status-select">
+                    <option value="">Changer statut...</option>
+                    <option value="confirmed">Confirmer</option>
+                    <option value="cancelled">Annuler</option>
+                    <option value="completed">Terminer</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    {% empty %}
+    <div class="empty-state">
+        <div class="empty-icon">&#128197;</div>
+        <h3>Aucun rendez-vous</h3>
+        <p>Les rendez-vous pris sur votre site appara&icirc;tront ici.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -130,6 +130,7 @@ STATICFILES_DIRS = [BASE_DIR / "core/static"]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirect URL after login/logout
+LOGIN_URL = '/connexion/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -140,6 +141,7 @@ EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER', '')
 
 # Security Settings (for production)
 if not DEBUG:

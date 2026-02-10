@@ -1,11 +1,17 @@
-from django.shortcuts import render, redirect
-from .forms import InscriptionForm, ContactForm, AppointmentForm
-from .models import Appointment
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import InscriptionForm, ContactForm, AppointmentForm, FollowUpEmailForm
+from .models import Appointment, SentEmail
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from django.core.mail import send_mail
+from django.conf import settings
+from django.urls import reverse_lazy
 from datetime import datetime, time, timedelta
+from functools import wraps
 import logging
 import json
 
@@ -185,3 +191,156 @@ def get_available_slots(request):
     except Exception as e:
         logger.error(f"Error fetching available slots: {str(e)}")
         return JsonResponse({'error': 'Une erreur s\'est produite.'}, status=500)
+
+
+# --- Staff-required decorator ---
+
+def staff_required(view_func):
+    """Decorator that ensures user is logged in AND is_staff."""
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(f'/connexion/?next={request.path}')
+        if not request.user.is_staff:
+            messages.error(request, "Accès non autorisé.")
+            return redirect('index')
+        return view_func(request, *args, **kwargs)
+    return wrapper
+
+
+# --- Authentication views ---
+
+def connexion_view(request):
+    """Handle user login. Staff users are redirected to dashboard."""
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            return redirect('dashboard_home')
+        return redirect('index')
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            next_url = request.GET.get('next', '')
+            if next_url:
+                return redirect(next_url)
+            if user.is_staff:
+                return redirect('dashboard_home')
+            return redirect('index')
+        else:
+            messages.error(request, "Identifiants incorrects. Veuillez réessayer.")
+
+    return render(request, 'core/connexion.html')
+
+
+def deconnexion_view(request):
+    """Log out the user and redirect to homepage."""
+    logout(request)
+    return redirect('index')
+
+
+# --- Dashboard views ---
+
+@staff_required
+def dashboard_home(request):
+    """Main dashboard page showing all appointments and stats."""
+    appointments = Appointment.objects.all().order_by('-appointment_date', '-appointment_time')
+
+    context = {
+        'appointments': appointments,
+        'total_count': appointments.count(),
+        'pending_count': appointments.filter(status='pending').count(),
+        'confirmed_count': appointments.filter(status='confirmed').count(),
+        'formation_count': appointments.filter(appointment_type='formation').count(),
+        'livrables_count': appointments.filter(appointment_type='livrables').count(),
+    }
+    return render(request, 'core/dashboard/dashboard_home.html', context)
+
+
+@staff_required
+def dashboard_send_email(request, pk):
+    """Send a follow-up email for a specific appointment."""
+    appointment = get_object_or_404(Appointment, pk=pk)
+    sent_emails = appointment.sent_emails.all()
+
+    if request.method == 'POST':
+        form = FollowUpEmailForm(request.POST)
+        if form.is_valid():
+            try:
+                subject = form.cleaned_data['email_subject'].replace('\n', '').replace('\r', '')
+                body = form.cleaned_data['email_body']
+
+                send_mail(
+                    subject=subject,
+                    message=body,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[appointment.email],
+                    fail_silently=False,
+                )
+
+                SentEmail.objects.create(
+                    appointment=appointment,
+                    subject=subject,
+                    body=body,
+                    recipient_email=appointment.email,
+                    sent_by=request.user,
+                )
+
+                messages.success(request, f"Email envoyé avec succès à {appointment.name} ({appointment.email})")
+                logger.info(f"Follow-up email sent to {appointment.email} by {request.user.username}")
+                return redirect('dashboard_home')
+            except Exception as e:
+                logger.error(f"Error sending email: {str(e)}")
+                messages.error(request, "Erreur lors de l'envoi de l'email. Veuillez réessayer.")
+    else:
+        form = FollowUpEmailForm(initial={
+            'email_subject': f"Suite à votre rendez-vous - Gourmelon BTP",
+        })
+
+    return render(request, 'core/dashboard/send_email.html', {
+        'appointment': appointment,
+        'form': form,
+        'sent_emails': sent_emails,
+    })
+
+
+@staff_required
+@require_http_methods(["POST"])
+def dashboard_update_status(request, pk):
+    """Update the status of an appointment."""
+    appointment = get_object_or_404(Appointment, pk=pk)
+    new_status = request.POST.get('status')
+    valid_statuses = dict(Appointment.STATUS_CHOICES)
+
+    if new_status in valid_statuses:
+        Appointment.objects.filter(pk=pk).update(status=new_status)
+        appointment.refresh_from_db()
+        messages.success(request, f"Statut mis à jour : {appointment.get_status_display()}")
+        logger.info(f"Appointment {pk} status updated to {new_status} by {request.user.username}")
+    else:
+        messages.error(request, "Statut invalide.")
+
+    return redirect('dashboard_home')
+
+
+# --- Password change views ---
+
+class StaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
+    """Mixin that requires user to be logged in and is_staff."""
+    login_url = '/connexion/'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class DashboardPasswordChangeView(StaffRequiredMixin, PasswordChangeView):
+    """Password change view for dashboard users."""
+    template_name = 'core/dashboard/password_change.html'
+    success_url = reverse_lazy('dashboard_password_done')
+
+
+class DashboardPasswordDoneView(StaffRequiredMixin, PasswordChangeDoneView):
+    """Password change success view for dashboard users."""
+    template_name = 'core/dashboard/password_change_done.html'

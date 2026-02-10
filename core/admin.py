@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ContactMessage, Appointment
+from .models import ContactMessage, Appointment, SentEmail
 
 
 @admin.register(ContactMessage)
@@ -32,3 +32,12 @@ class AppointmentAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ("created_at", "updated_at")
+
+
+@admin.register(SentEmail)
+class SentEmailAdmin(admin.ModelAdmin):
+    """Admin interface for sent follow-up emails."""
+    list_display = ("recipient_email", "subject", "sent_at", "sent_by")
+    list_filter = ("sent_at",)
+    search_fields = ("recipient_email", "subject", "body")
+    readonly_fields = ("appointment", "subject", "body", "recipient_email", "sent_at", "sent_by")

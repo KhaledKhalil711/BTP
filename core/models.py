@@ -83,3 +83,22 @@ class Appointment(models.Model):
     def save(self, *args, **kwargs):
         self.full_clean()
         super().save(*args, **kwargs)
+
+
+class SentEmail(models.Model):
+    """Model to track follow-up emails sent from the dashboard."""
+
+    appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE, related_name='sent_emails')
+    subject = models.CharField(max_length=200)
+    body = models.TextField()
+    recipient_email = models.EmailField()
+    sent_at = models.DateTimeField(auto_now_add=True)
+    sent_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    class Meta:
+        ordering = ['-sent_at']
+        verbose_name = 'Email envoyé'
+        verbose_name_plural = 'Emails envoyés'
+
+    def __str__(self):
+        return f"Email à {self.recipient_email} - {self.subject} ({self.sent_at.strftime('%d/%m/%Y')})"

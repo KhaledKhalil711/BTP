@@ -1,11 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTP - Inscription</title>
+    <title>BTP - Connexion</title>
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=1.1">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -18,41 +18,49 @@
             </a>
         </div>
         <div class="nav-links">
-            <a href="{% url 'index' %}" class="nav-link-bold">← Retour à l'accueil</a>
+            <a href="{% url 'index' %}" class="nav-link-bold">&larr; Retour &agrave; l'accueil</a>
         </div>
     </nav>
 
     <div class="registration-section">
         <div class="registration-container">
             <div class="registration-header">
-                <h2>Inscription</h2>
-                <p>Créez votre compte professionnel Gourmelon BTP</p>
+                <h2>Connexion</h2>
+                <p>Acc&eacute;dez &agrave; votre espace Gourmelon BTP</p>
             </div>
+
+            {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" style="margin-bottom: 1rem; padding: 0.8rem 1.2rem; border-radius: 8px; background: #f8d7da; color: #721c24;">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
 
             <form class="contact-form" method="post">
                 {% csrf_token %}
 
-                {% for field in form %}
                 <div class="form-group-animated">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field }}
-                    {% if field.help_text %}
-                    <span class="helptext">{{ field.help_text }}</span>
-                    {% endif %}
-                    {{ field.errors }}
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Votre nom d'utilisateur" required autofocus>
                 </div>
-                {% endfor %}
 
-                <button type="submit" class="btn-register">Créer mon compte</button>
+                <div class="form-group-animated">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Votre mot de passe" required>
+                </div>
+
+                <button type="submit" class="btn-register">Se connecter</button>
             </form>
-            
+
             <p class="login-prompt">
-                Déjà inscrit ? <a href="{% url 'connexion' %}" class="login-link">Se connecter</a>
+                Pas encore de compte ? <a href="{% url 'inscription' %}" class="login-link">S'inscrire</a>
             </p>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer-main">
         <div class="footer-content">
             <div class="footer-logo footer-logo-container">
@@ -62,7 +70,7 @@
                 <h3 class="footer-title">Gourmelon BTP</h3>
             </div>
             <div class="footer-copyright">
-                <p>&copy; 2026 Gourmelon BTP. Tous droits réservés.</p>
+                <p>&copy; 2026 Gourmelon BTP. Tous droits r&eacute;serv&eacute;s.</p>
             </div>
         </div>
     </footer>

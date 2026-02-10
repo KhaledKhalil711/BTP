@@ -56,6 +56,10 @@
                 <a href="{% url 'inscription' %}"
                     style="margin-left: 1rem; padding: 0.5rem 1rem; background-color: var(--secondary-color, #e67e22); color: white; border-radius: 5px; text-decoration: none;">S'inscrire</a>
 
+                {% if user.is_staff %}
+                <a href="{% url 'dashboard_home' %}" style="margin-left: 1rem; padding: 0.5rem 1rem; background: var(--gradient-primary); color: white; border-radius: 5px; text-decoration: none;">Mon espace</a>
+                {% endif %}
+
                 <!-- Dark Mode Toggle -->
                 <div class="theme-switch-wrapper" style="margin-left: 2rem;">
                     <label class="theme-switch" for="checkbox">

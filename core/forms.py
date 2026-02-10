@@ -109,3 +109,24 @@ class AppointmentForm(forms.ModelForm):
             if time.hour < 9 or time.hour >= 16:
                 raise forms.ValidationError("Les rendez-vous sont disponibles de 9h à 16h.")
         return time
+
+
+class FollowUpEmailForm(forms.Form):
+    """Form for sending follow-up emails from the dashboard."""
+
+    email_subject = forms.CharField(
+        max_length=200,
+        label="Sujet",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "Sujet de l'email",
+        })
+    )
+    email_body = forms.CharField(
+        label="Message",
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 10,
+            'placeholder': 'Votre message...',
+        })
+    )

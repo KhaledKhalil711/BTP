@@ -21,7 +21,10 @@
             <a href="{% url 'index' %}#projets">Projets</a>
             <a href="{% url 'index' %}#services">Services</a>
             <a href="{% url 'contact' %}" class="active">Contact</a>
-            
+            {% if user.is_staff %}
+            <a href="{% url 'dashboard_home' %}" class="nav-link-bold" style="margin-left: 0.5rem;">Mon espace</a>
+            {% endif %}
+
             <!-- Dark Mode Toggle -->
             <div class="theme-switch-wrapper" style="margin-left: 2rem;">
                 <label class="theme-switch" for="checkbox">

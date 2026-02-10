@@ -1,0 +1,67 @@
+{% extends "core/dashboard/base_dashboard.html" %}
+{% load static %}
+
+{% block title %}Envoyer un email{% endblock %}
+
+{% block content %}
+<div class="dashboard-section">
+    <div class="email-form-container">
+        <div class="email-form-header">
+            <h2>Envoyer un email de suivi</h2>
+            <p>&Agrave; : <strong>{{ appointment.name }}</strong> ({{ appointment.email }})</p>
+        </div>
+
+        <!-- Appointment context card -->
+        <div class="appointment-context-card">
+            <div class="context-card-header">
+                <span class="type-badge type-{{ appointment.appointment_type }}">
+                    {{ appointment.get_appointment_type_display }}
+                </span>
+                <span class="status-badge status-{{ appointment.status }}">
+                    {{ appointment.get_status_display }}
+                </span>
+            </div>
+            <p><strong>Date :</strong> {{ appointment.appointment_date|date:"d/m/Y" }} &agrave; {{ appointment.appointment_time|time:"H:i" }}</p>
+            {% if appointment.subject %}
+            <p><strong>Sujet :</strong> {{ appointment.subject }}</p>
+            {% endif %}
+            {% if appointment.notes %}
+            <p><strong>Notes :</strong> {{ appointment.notes }}</p>
+            {% endif %}
+        </div>
+
+        <form method="post" class="contact-form">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group-animated">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <span class="field-error">{{ field.errors.0 }}</span>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div class="email-form-actions">
+                <button type="submit" class="btn-register">Envoyer l'email</button>
+                <a href="{% url 'dashboard_home' %}" class="btn-back">&larr; Retour au tableau de bord</a>
+            </div>
+        </form>
+
+        <!-- Email History -->
+        {% if sent_emails %}
+        <div class="email-history">
+            <h3>Historique des emails envoy&eacute;s</h3>
+            {% for email in sent_emails %}
+            <div class="email-history-item">
+                <div class="email-history-header">
+                    <strong>{{ email.subject }}</strong>
+                    <span class="email-history-date">{{ email.sent_at|date:"d/m/Y &agrave; H:i" }}</span>
+                </div>
+                <p class="email-history-body">{{ email.body|truncatewords:50 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

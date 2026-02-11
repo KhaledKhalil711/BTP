@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Rendez-vous - Gourmelon BTP</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=1.1">
+    <link rel="stylesheet" href="{% static 'core/css/dashboard.css' %}?v=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="body-overflow-auto">
+    <nav class="navbar">
+        <div class="nav-logo">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" class="nav-logo-img">
+            </a>
+        </div>
+        <div class="nav-links" style="display: flex; align-items: center;">
+            <a href="{% url 'index' %}">Accueil</a>
+            <a href="{% url 'formation' %}">Formations</a>
+            <a href="{% url 'livrables' %}">Livrables</a>
+            <a href="{% url 'contact' %}">Contact</a>
+            <a href="{% url 'mes_rendez_vous' %}" class="active">Mes rendez-vous</a>
+            <a href="{% url 'dashboard_logout' %}" style="margin-left: 0.5rem; padding: 0.4rem 0.8rem; background: #dc3545; color: white; border-radius: 5px; text-decoration: none; font-size: 0.9rem;">D&eacute;connexion</a>
+        </div>
+    </nav>
+
+    <header class="dashboard-hero">
+        <h1>Mes Rendez-vous</h1>
+        <p>Bonjour {{ user.first_name|default:user.username }}, voici vos rendez-vous avec Gourmelon BTP</p>
+    </header>
+
+    {% if appointments %}
+    <!-- Desktop Table -->
+    <div class="appointments-table-wrapper">
+        <table class="appointments-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Sujet</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td>
+                        <span class="type-badge type-{{ appointment.appointment_type }}">
+                            {{ appointment.get_appointment_type_display }}
+                        </span>
+                    </td>
+                    <td>{{ appointment.appointment_date|date:"d/m/Y" }}</td>
+                    <td>{{ appointment.appointment_time|time:"H:i" }}</td>
+                    <td>{{ appointment.subject|default:"Non pr&eacute;cis&eacute;" }}</td>
+                    <td>
+                        <span class="status-badge status-{{ appointment.status }}">
+                            {{ appointment.get_status_display }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mobile Cards -->
+    <div class="appointments-cards">
+        {% for appointment in appointments %}
+        <div class="appointment-card">
+            <div class="appointment-card-header">
+                <span class="type-badge type-{{ appointment.appointment_type }}">
+                    {{ appointment.get_appointment_type_display }}
+                </span>
+                <span class="status-badge status-{{ appointment.status }}">
+                    {{ appointment.get_status_display }}
+                </span>
+            </div>
+            <div class="appointment-card-body">
+                <p class="appointment-card-date">{{ appointment.appointment_date|date:"d/m/Y" }} &agrave; {{ appointment.appointment_time|time:"H:i" }}</p>
+                {% if appointment.subject %}
+                <p class="appointment-card-subject"><strong>Sujet :</strong> {{ appointment.subject }}</p>
+                {% endif %}
+                {% if appointment.notes %}
+                <p style="font-size: 0.9rem; opacity: 0.7;">{{ appointment.notes }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+        <div class="empty-state">
+            <div class="empty-icon">&#128197;</div>
+            <h3>Aucun rendez-vous</h3>
+            <p>Vous n'avez pas encore de rendez-vous. R&eacute;servez-en un !</p>
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="{% url 'formation' %}" style="padding: 0.8rem 2rem; background: var(--gradient-accent); color: white; border-radius: 10px; text-decoration: none; font-weight: 600;">R&eacute;server une Formation</a>
+                <a href="{% url 'livrables' %}" style="padding: 0.8rem 2rem; background: var(--gradient-primary); color: white; border-radius: 10px; text-decoration: none; font-weight: 600;">R&eacute;server un Projet</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <footer class="footer-main" style="margin-top: 3rem;">
+        <div class="footer-content">
+            <div class="footer-logo footer-logo-container">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" class="footer-logo-img">
+            </div>
+            <div class="footer-info">
+                <h3 class="footer-title">Gourmelon BTP</h3>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 Gourmelon BTP. Tous droits r&eacute;serv&eacute;s.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

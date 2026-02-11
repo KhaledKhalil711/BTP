@@ -53,11 +53,16 @@
                 <a href="#formation">Formation</a>
                 <a href="#services">Services</a>
                 <a href="{% url 'contact' %}">Contact</a>
-                <a href="{% url 'inscription' %}"
-                    style="margin-left: 1rem; padding: 0.5rem 1rem; background-color: var(--secondary-color, #e67e22); color: white; border-radius: 5px; text-decoration: none;">S'inscrire</a>
-
-                {% if user.is_staff %}
-                <a href="{% url 'dashboard_home' %}" style="margin-left: 1rem; padding: 0.5rem 1rem; background: var(--gradient-primary); color: white; border-radius: 5px; text-decoration: none;">Mon espace</a>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                    <a href="{% url 'dashboard_home' %}" style="margin-left: 1rem; padding: 0.5rem 1rem; background: var(--gradient-primary); color: white; border-radius: 5px; text-decoration: none;">Mon espace</a>
+                    {% else %}
+                    <a href="{% url 'mes_rendez_vous' %}" style="margin-left: 1rem; padding: 0.5rem 1rem; background: var(--gradient-primary); color: white; border-radius: 5px; text-decoration: none;">Mes rendez-vous</a>
+                    {% endif %}
+                    <a href="{% url 'dashboard_logout' %}" style="margin-left: 0.5rem; padding: 0.5rem 1rem; background: #dc3545; color: white; border-radius: 5px; text-decoration: none;">D&eacute;connexion</a>
+                {% else %}
+                    <a href="{% url 'connexion' %}" style="margin-left: 1rem; padding: 0.5rem 1rem; background: var(--gradient-primary); color: white; border-radius: 5px; text-decoration: none;">Se connecter</a>
+                    <a href="{% url 'inscription' %}" style="margin-left: 0.5rem; padding: 0.5rem 1rem; background-color: var(--secondary-color, #e67e22); color: white; border-radius: 5px; text-decoration: none;">S'inscrire</a>
                 {% endif %}
 
                 <!-- Dark Mode Toggle -->

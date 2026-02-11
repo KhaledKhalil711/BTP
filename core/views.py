@@ -193,6 +193,17 @@ def get_available_slots(request):
         return JsonResponse({'error': 'Une erreur s\'est produite.'}, status=500)
 
 
+# --- User appointments view ---
+
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='/connexion/')
+def mes_rendez_vous(request):
+    """Show logged-in user's own appointments."""
+    appointments = Appointment.objects.filter(user=request.user).order_by('-appointment_date', '-appointment_time')
+    return render(request, 'core/mes_rendez_vous.html', {'appointments': appointments})
+
+
 # --- Staff-required decorator ---
 
 def staff_required(view_func):

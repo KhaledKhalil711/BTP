@@ -9,6 +9,8 @@ urlpatterns = [
     path('inscription/', views.inscription, name='inscription'),
     # API endpoints
     path('api/available-slots/', views.get_available_slots, name='api_available_slots'),
+    # User appointments
+    path('mes-rendez-vous/', views.mes_rendez_vous, name='mes_rendez_vous'),
     # Authentication
     path('connexion/', views.connexion_view, name='connexion'),
     path('deconnexion/', views.deconnexion_view, name='dashboard_logout'),

@@ -24,7 +24,7 @@
             <a href="{% url 'livrables' %}">Livrables</a>
             <a href="{% url 'contact' %}">Contact</a>
             <a href="{% url 'mes_rendez_vous' %}" class="active">Mes rendez-vous</a>
-            <a href="{% url 'dashboard_logout' %}" style="margin-left: 0.5rem; padding: 0.4rem 0.8rem; background: #dc3545; color: white; border-radius: 5px; text-decoration: none; font-size: 0.9rem;">D&eacute;connexion</a>
+            <form method="post" action="{% url 'dashboard_logout' %}" style="display: inline; margin-left: 0.5rem;">{% csrf_token %}<button type="submit" style="padding: 0.4rem 0.8rem; background: #dc3545; color: white; border-radius: 5px; border: none; cursor: pointer; font-family: inherit; font-size: 0.9rem;">D&eacute;connexion</button></form>
         </div>
     </nav>
 

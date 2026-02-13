@@ -21,7 +21,7 @@
         <div class="nav-links">
             <a href="{% url 'dashboard_home' %}" class="nav-link-bold">Rendez-vous</a>
             <a href="{% url 'dashboard_password_change' %}" class="nav-link-bold">Mon Compte</a>
-            <a href="{% url 'dashboard_logout' %}" class="btn-logout">D&eacute;connexion</a>
+            <form method="post" action="{% url 'dashboard_logout' %}" style="display: inline;">{% csrf_token %}<button type="submit" class="btn-logout" style="border: none; cursor: pointer; font-family: inherit; font-size: inherit;">D&eacute;connexion</button></form>
             <div class="theme-switch-wrapper" style="margin-left: 1rem;">
                 <label class="theme-switch" for="checkbox">
                     <input type="checkbox" id="checkbox" />

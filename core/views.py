@@ -10,10 +10,16 @@ from django.views.decorators.http import require_http_methods
 from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse_lazy
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.core.cache import cache
 from datetime import datetime, time, timedelta
 from functools import wraps
 import logging
 import json
+
+# Rate limiting constants
+MAX_LOGIN_ATTEMPTS = 5
+LOGIN_LOCKOUT_SECONDS = 300  # 5 minutes
 
 logger = logging.getLogger(__name__)
 
@@ -221,31 +227,54 @@ def staff_required(view_func):
 
 # --- Authentication views ---
 
+def _get_client_ip(request):
+    """Extract the client IP address from the request."""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        return x_forwarded_for.split(',')[0].strip()
+    return request.META.get('REMOTE_ADDR')
+
+
 def connexion_view(request):
-    """Handle user login. Staff users are redirected to dashboard."""
+    """Handle user login with rate limiting. Staff users are redirected to dashboard."""
     if request.user.is_authenticated:
         if request.user.is_staff:
             return redirect('dashboard_home')
         return redirect('index')
 
     if request.method == 'POST':
+        ip = _get_client_ip(request)
+        cache_key = f'login_attempts_{ip}'
+        attempts = cache.get(cache_key, 0)
+
+        if attempts >= MAX_LOGIN_ATTEMPTS:
+            messages.error(request, "Trop de tentatives de connexion. Veuillez réessayer dans 5 minutes.")
+            return render(request, 'core/connexion.html')
+
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
+            cache.delete(cache_key)
             login(request, user)
             next_url = request.GET.get('next', '')
-            if next_url:
+            if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
                 return redirect(next_url)
             if user.is_staff:
                 return redirect('dashboard_home')
             return redirect('index')
         else:
-            messages.error(request, "Identifiants incorrects. Veuillez réessayer.")
+            cache.set(cache_key, attempts + 1, LOGIN_LOCKOUT_SECONDS)
+            remaining = MAX_LOGIN_ATTEMPTS - attempts - 1
+            if remaining > 0:
+                messages.error(request, f"Identifiants incorrects. {remaining} tentative(s) restante(s).")
+            else:
+                messages.error(request, "Trop de tentatives de connexion. Veuillez réessayer dans 5 minutes.")
 
     return render(request, 'core/connexion.html')
 
 
+@require_http_methods(["POST"])
 def deconnexion_view(request):
     """Log out the user and redirect to homepage."""
     logout(request)

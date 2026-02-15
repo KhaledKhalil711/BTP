@@ -2798,3 +2798,17 @@ footer {
     background: rgba(255, 255, 255, 0.9);
     transform: scale(1.05);
 }
+
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 13px;
+}

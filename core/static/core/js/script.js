@@ -89,6 +89,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 }, 1500); // Match CSS animation duration
             });
+
+            // Landing CTA link inside overlay (explicit click target)
+            const landingCtaLink = document.getElementById('landing-cta');
+            if (landingCtaLink) {
+                landingCtaLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Delegate to same animation as clicking the overlay
+                    landingPage.click();
+                });
+            }
+
+            
         }
     }
 

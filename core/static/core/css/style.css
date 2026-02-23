@@ -93,6 +93,24 @@ body, html {
     animation: slideUp 1s ease-out;
 }
 
+/* Small centered CTA link on landing overlay */
+.landing-cta-link {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.18);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.landing-cta-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+}
+
+
 /* Zoom Animation */
 .zoom-effect {
     animation: zoomIntoLogo 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;

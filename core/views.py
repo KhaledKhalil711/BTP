@@ -24,6 +24,90 @@ LOGIN_LOCKOUT_SECONDS = 300  # 5 minutes
 logger = logging.getLogger(__name__)
 
 
+def send_contact_acknowledgment_email(email, name, subject):
+    """
+    Send an acknowledgment email to the user after they submit a contact form.
+    
+    Args:
+        email (str): Recipient email address
+        name (str): Recipient name
+        subject (str): Subject of the original contact message
+    """
+    try:
+        email_subject = "Accusé de réception - Gourmelon BTP"
+        email_body = f"""Bonjour {name},
+
+Merci pour votre message ! Nous avons bien reçu votre demande concernant : {subject}
+
+Notre équipe examinera votre message et vous répondra dans les plus brefs délais (généralement sous 24 à 48 heures).
+
+Si vous avez des questions urgentes, n'hésitez pas à nous appeler au 06.16.47.28.32.
+
+Cordialement,
+L'équipe Gourmelon BTP
+gourmelon.btp@gmail.com
+"""
+        
+        send_mail(
+            subject=email_subject,
+            message=email_body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[email],
+            fail_silently=False,
+        )
+        logger.info(f"Acknowledgment email sent to {email}")
+    except Exception as e:
+        logger.error(f"Error sending acknowledgment email to {email}: {str(e)}")
+        raise
+
+
+def send_inscription_confirmation_email(email, username, first_name):
+    """
+    Send a registration confirmation email to the user after they create an account.
+    
+    Args:
+        email (str): Recipient email address
+        username (str): User's username
+        first_name (str): User's first name
+    """
+    try:
+        email_subject = "Confirmation d'inscription - Gourmelon BTP"
+        email_body = f"""Bonjour {first_name},
+
+Bienvenue chez Gourmelon BTP ! 🎉
+
+Votre compte a été créé avec succès avec les identifiants suivants :
+- Identifiant : {username}
+- Email : {email}
+
+Vous pouvez maintenant vous connecter à votre espace personnel et accéder à :
+✓ Vos rendez-vous et réservations
+✓ Votre profil personnel
+✓ Les services proposés
+
+Pour accéder à votre compte, visitez notre site : https://gourmelon-btp.com
+
+Si vous avez des questions ou besoin d'assistance, n'hésitez pas à nous contacter :
+- Par mail : gourmelon.btp@gmail.com
+- Par téléphone : 06.16.47.28.32
+
+Cordialement,
+L'équipe Gourmelon BTP
+"""
+        
+        send_mail(
+            subject=email_subject,
+            message=email_body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[email],
+            fail_silently=False,
+        )
+        logger.info(f"Registration confirmation email sent to {email}")
+    except Exception as e:
+        logger.error(f"Error sending registration confirmation email to {email}: {str(e)}")
+        raise
+
+
 def landing(request):
     """Render the landing page."""
     return render(request, 'core/landing.html')
@@ -96,14 +180,22 @@ def contact(request):
     """
     Handle contact form submission.
     GET: Display contact form
-    POST: Process and save contact message
+    POST: Process and save contact message, then send acknowledgment email
     """
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
             try:
-                form.save()
-                messages.success(request, "Message envoyé avec succès !")
+                contact_message = form.save()
+                
+                # Send acknowledgment email to the user
+                send_contact_acknowledgment_email(
+                    email=contact_message.email,
+                    name=contact_message.name,
+                    subject=contact_message.subject
+                )
+                
+                messages.success(request, "Message envoyé avec succès ! Vous recevrez un email de confirmation.")
                 logger.info(f"Contact message received from {form.cleaned_data['email']}")
                 return redirect('contact')
             except Exception as e:
@@ -121,15 +213,23 @@ def inscription(request):
     """
     Handle user registration.
     GET: Display registration form
-    POST: Process and create new user account
+    POST: Process and create new user account, then send confirmation email
     """
     if request.method == "POST":
         form = InscriptionForm(request.POST)
         if form.is_valid():
             try:
                 user = form.save()
+                
+                # Send registration confirmation email
+                send_inscription_confirmation_email(
+                    email=user.email,
+                    username=user.username,
+                    first_name=user.first_name
+                )
+                
                 login(request, user)
-                messages.success(request, "Inscription réussie ! Bienvenue.")
+                messages.success(request, "Inscription réussie ! Bienvenue. Un email de confirmation a été envoyé.")
                 logger.info(f"New user registered: {user.username}")
                 return redirect('index')
             except Exception as e:

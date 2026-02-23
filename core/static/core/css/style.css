@@ -93,6 +93,26 @@ body, html {
     animation: slideUp 1s ease-out;
 }
 
+/* Small centered CTA link on landing overlay */
+.landing-cta-link {
+    display: inline-block;
+    color: black;
+    text-decoration: none;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.18);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    background-color: orange;
+}
+.landing-cta-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+    color: yellowgreen;
+}
+
+
 /* Zoom Animation */
 .zoom-effect {
     animation: zoomIntoLogo 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -2797,4 +2817,18 @@ footer {
 .training-card.corporate .btn-training:hover {
     background: rgba(255, 255, 255, 0.9);
     transform: scale(1.05);
+}
+
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 13px;
 }

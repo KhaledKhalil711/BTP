@@ -1,35 +1,46 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTP - Contactez-nous</title>
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=1.1">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Gourmelon BTP - Contactez-nous</title>
+    <meta name="description" content="Contactez Gourmelon BTP pour formations et projets BTP.">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=1.4">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body style="overflow: auto;"> 
+
+<body style="overflow: auto;">
     <nav class="navbar">
         <div class="nav-logo">
             <a href="{% url 'index' %}">
-                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="Gourmelon BTP" style="height: 40px; filter: brightness(0) invert(1) contrast(2) grayscale(1) brightness(0);">
+                <img src="{% static 'core/images/logo_no_bg.png' %}" alt="BTP Logo" style="height: 40px;">
             </a>
         </div>
         <div class="nav-links" style="display: flex; align-items: center;">
-            <a href="{% url 'index' %}">Accueil</a>
             <a href="{% url 'index' %}#profil">Profil</a>
+            <a href="{% url 'index' %}#experience">Expérience</a>
+            <a href="{% url 'index' %}#competences">Compétences</a>
             <a href="{% url 'index' %}#projets">Projets</a>
+            <a href="{% url 'index' %}#formation">Formation</a>
+
             <a href="{% url 'index' %}#services">Services</a>
             <a href="{% url 'contact' %}" class="active">Contact</a>
+
             {% if user.is_authenticated %}
                 {% if user.is_staff %}
-                <a href="{% url 'dashboard_home' %}" class="nav-link-bold" style="margin-left: 0.5rem;">Mon espace</a>
+                    <a href="{% url 'dashboard_home' %}" style="margin-left: 1rem; padding: 0.5rem 1rem; background: var(--gradient-primary); color: white; border-radius: 5px; text-decoration: none;">Mon espace</a>
                 {% else %}
-                <a href="{% url 'mes_rendez_vous' %}" class="nav-link-bold" style="margin-left: 0.5rem;">Mes rendez-vous</a>
+                    <a href="{% url 'mes_rendez_vous' %}" style="margin-left: 1rem; padding: 0.5rem 1rem; background: var(--gradient-primary); color: white; border-radius: 5px; text-decoration: none;">Mes rendez-vous</a>
                 {% endif %}
-                <form method="post" action="{% url 'dashboard_logout' %}" style="display: inline; margin-left: 0.5rem;">{% csrf_token %}<button type="submit" style="padding: 0.4rem 0.8rem; background: #dc3545; color: white; border-radius: 5px; border: none; cursor: pointer; font-family: inherit; font-size: 0.9rem;">D&eacute;connexion</button></form>
+                <form method="post" action="{% url 'dashboard_logout' %}" style="display: inline; margin-left: 0.5rem;">
+                    {% csrf_token %}
+                    <button type="submit" style="padding: 0.5rem 1rem; background: #dc3545; color: white; border-radius: 5px; border: none; cursor: pointer; font-family: inherit; font-size: inherit;">Déconnexion</button>
+                </form>
             {% else %}
-                <a href="{% url 'connexion' %}" class="nav-link-bold" style="margin-left: 0.5rem;">Se connecter</a>
+                <a href="{% url 'connexion' %}" style="margin-left: 1rem; padding: 0.5rem 1rem; background: var(--gradient-primary); color: white; border-radius: 5px; text-decoration: none;">Se connecter</a>
+                <a href="{% url 'inscription' %}" style="margin-left: 0.5rem; padding: 0.5rem 1rem; background-color: var(--secondary-color, #e67e22); color: white; border-radius: 5px; text-decoration: none;">S'inscrire</a>
             {% endif %}
 
             <!-- Dark Mode Toggle -->
@@ -72,28 +83,23 @@
                     <label for="name">Nom / Entreprise</label>
                     <input type="text" id="name" name="name" required placeholder="Votre nom">
                 </div>
-                
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required placeholder="Votre email">
                 </div>
-                
                 <div class="form-group">
                     <label for="subject">Sujet</label>
                     <input type="text" id="subject" name="subject" required placeholder="Sujet de votre message">
                 </div>
-                
                 <div class="form-group">
                     <label for="message">Message</label>
                     <textarea id="message" name="message" rows="5" required placeholder="Votre message..."></textarea>
                 </div>
-                
-                <button type="submit" class="btn-submit">Envoyer le message</button>
+                <button type="submit" class="btn-primary">Envoyer le message</button>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer style="text-align: center; padding: 3rem 2rem; background-color: var(--primary-color); color: white; margin-top: auto;">
         <div class="footer-content">
             <div class="footer-logo" style="margin-bottom: 1rem;">
@@ -109,28 +115,24 @@
     </footer>
 
     <script>
-        // Dark Mode Toggle Logic
         const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
         const currentTheme = localStorage.getItem('theme');
-
         if (currentTheme) {
             document.documentElement.setAttribute('data-theme', currentTheme);
-            if (currentTheme === 'dark') {
-                toggleSwitch.checked = true;
-            }
+            if (currentTheme === 'dark') toggleSwitch.checked = true;
         }
-
-        function switchTheme(e) {
+        toggleSwitch.addEventListener('change', function(e) {
             if (e.target.checked) {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
             } else {
                 document.documentElement.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
-            }    
-        }
-
-        toggleSwitch.addEventListener('change', switchTheme);
+            }
+        });
     </script>
 </body>
 </html>
+
+
+

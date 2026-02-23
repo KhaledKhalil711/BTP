@@ -96,7 +96,7 @@ body, html {
 /* Small centered CTA link on landing overlay */
 .landing-cta-link {
     display: inline-block;
-    color: white;
+    color: black;
     text-decoration: none;
     background: transparent;
     border: 2px solid rgba(255,255,255,0.18);
@@ -104,10 +104,12 @@ body, html {
     border-radius: 999px;
     font-weight: 600;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
+    background-color: orange;
 }
 .landing-cta-link:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+    color: yellowgreen;
 }
 
 
